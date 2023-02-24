@@ -1,8 +1,8 @@
 import 'dart:ui';
-import 'package:slide_to_confirm/slide_to_confirm.dart';
 
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+import 'package:znanija_clone/ui/widgets/auth/auth_widget.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});
@@ -42,12 +42,15 @@ class _StartScreenState extends State<StartScreen> {
                     height: 20,
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: const [
                       Expanded(child: Divider(color: Colors.black)),
+                      SizedBox(width: 20),
                       Text(
                         "How does it work?",
                         style: TextStyle(fontSize: 20),
                       ),
+                      SizedBox(width: 20),
                       Expanded(child: Divider(color: Colors.black)),
                     ],
                   ),
@@ -57,11 +60,44 @@ class _StartScreenState extends State<StartScreen> {
                   const WelcomeWidget(),
                   const Spacer(flex: 2),
                   Center(
-                    child: ConfirmationSlider(
-                      text: 'SWIPE TO START',
-                      stickToEnd: true,
-                      foregroundColor: Colors.black,
-                      onConfirmation: () {},
+                    child: SizedBox(
+                      width: 300,
+                      height: 50,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromARGB(255, 149, 68, 255),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                        ),
+                        onPressed: () {
+                          showGeneralDialog(
+                            barrierDismissible: true,
+                            barrierLabel: 'Sign In',
+                            context: context,
+                            pageBuilder: (_, __, ___) => Container(
+                              height: 620,
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: 20,
+                                vertical: 120,
+                              ),
+                              decoration: const BoxDecoration(
+                                color: Colors.white,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(40)),
+                              ),
+                              child: const AuthWidget(),
+                            ),
+                          );
+                        },
+                        child: const Text(
+                          'GET STARTED',
+                          style: TextStyle(
+                              fontSize: 20,
+                              color: Color.fromARGB(255, 139, 244, 54)),
+                        ),
+                      ),
                     ),
                   ),
                   const Padding(

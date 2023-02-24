@@ -15,7 +15,6 @@ dependencies:
   cupertino_icons: ^1.0.2
   
   rive: ^0.10.1
-  slide_to_confirm: ^1.1.0
 
 dev_dependencies:
   flutter_test:
