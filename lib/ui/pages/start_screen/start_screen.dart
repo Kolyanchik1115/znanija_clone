@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
-import 'package:znanija_clone/ui/widgets/auth/auth_widget.dart';
+import 'package:znanija_clone/ui/pages/auth/auth_widget.dart';
 
 class StartScreen extends StatefulWidget {
   const StartScreen({super.key});

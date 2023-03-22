@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:znanija_clone/ui/pages/start_screen/start_screen.dart';
 
 class MainScreenWidget extends StatefulWidget {
-  const MainScreenWidget({Key? key}) : super(key: key);
+  final String token;
+  const MainScreenWidget({Key? key, required this.token}) : super(key: key);
 
   @override
   MainScreenWidgetState createState() => MainScreenWidgetState();
@@ -9,6 +12,7 @@ class MainScreenWidget extends StatefulWidget {
 
 class MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 0;
+  late SharedPreferences prefs;
 
   void onSelectTab(int index) {
     if (_selectedTab == index) return;
@@ -24,7 +28,23 @@ class MainScreenWidgetState extends State<MainScreenWidget> {
       body: IndexedStack(
         index: _selectedTab,
         children: [
-          Container(color: Colors.redAccent),
+          Container(
+            color: Colors.greenAccent,
+            child: ElevatedButton(
+              onPressed: () async {
+                prefs = await SharedPreferences.getInstance();
+                prefs.remove('token');
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const StartScreen(),
+                  ),
+                  ModalRoute.withName(''),
+                );
+              },
+              child: const Text(''),
+            ),
+          ),
           Container(color: Colors.greenAccent),
           Container(color: Colors.blueAccent),
         ],

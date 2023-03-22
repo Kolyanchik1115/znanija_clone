@@ -1,5 +1,11 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 import 'package:flutter/material.dart';
-import 'package:znanija_clone/ui/widgets/main_screen/main_screen_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:znanija_clone/config/config.dart';
+import 'package:znanija_clone/ui/pages/auth/register_page.dart';
+import 'package:znanija_clone/ui/pages/main_screen/main_screen_widget.dart';
 
 class AuthWidget extends StatelessWidget {
   const AuthWidget({super.key});
@@ -77,7 +83,14 @@ class AuthWidget extends StatelessWidget {
                 children: [
                   const Text("Don't have an account ?   "),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => RegisterPage(),
+                        ),
+                      );
+                    },
                     child: const Text(
                       'Sign up',
                     ),
@@ -101,26 +114,46 @@ class FormWidget extends StatefulWidget {
 }
 
 class _FormWidgetState extends State<FormWidget> {
-  final _loginTextController = TextEditingController();
-  final _passwordTextController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   String? errorText;
   bool isChecked = false;
+  bool isNotValidate = false;
+  late SharedPreferences prefs;
 
-  void _auth() {
-    final login = _loginTextController.text;
-    final password = _passwordTextController.text;
-    if (login == 'admin' && password == 'admin') {
-      errorText = null;
+  @override
+  void initState() {
+    super.initState();
+    initSharedPref();
+  }
+
+  void initSharedPref() async {
+    prefs = await SharedPreferences.getInstance();
+  }
+
+  void loginUser() async {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      var reqBody = {
+        "email": emailController.text,
+        "password": passwordController.text
+      };
+
+      var response = await http.post(Uri.parse(login),
+          headers: {"Content-Type": "application/json"},
+          body: jsonEncode(reqBody));
+
+      var jsonResponse = jsonDecode(response.body);
+      var myToken = jsonResponse['token'];
+      prefs.setString('token', myToken);
+
       Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const MainScreenWidget(),
-        ),
-      );
+          context,
+          MaterialPageRoute(
+              builder: (context) => MainScreenWidget(token: myToken)));
     } else {
-      errorText = 'Не верный логин или пароль';
+      errorText = 'Заполните логин или пароль';
     }
-    setState(() {});
   }
 
   @override
@@ -158,12 +191,12 @@ class _FormWidgetState extends State<FormWidget> {
             const SizedBox(height: 20),
           ],
           TextField(
-            controller: _loginTextController,
+            controller: emailController,
             decoration: emailTextFieldDecorator,
           ),
           const SizedBox(height: 20),
           TextField(
-            controller: _passwordTextController,
+            controller: passwordController,
             decoration: passTextFieldDecorator,
             obscureText: true,
           ),
@@ -175,7 +208,7 @@ class _FormWidgetState extends State<FormWidget> {
                 width: 300,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: _auth,
+                  onPressed: () => loginUser(),
                   style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
@@ -209,10 +242,6 @@ class _FormWidgetState extends State<FormWidget> {
                   const Text('Keep me logged in'),
                 ],
               ),
-              InkWell(
-                onTap: () {},
-                child: const Text('Forgot password?'),
-              )
             ],
           ),
         ],

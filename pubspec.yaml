@@ -1,20 +1,23 @@
 name: znanija_clone
 description: A new Flutter project.
 
-publish_to: 'none' 
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0-173.0.dev <4.0.0'
+  sdk: ">=3.0.0-173.0.dev <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  
+
   rive: ^0.10.1
+  http: ^0.13.5
+  shared_preferences: ^2.0.20
+  jwt_decoder: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -23,11 +26,8 @@ dev_dependencies:
   flutter_lints: ^2.0.0
 
 flutter:
-
-  
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
   assets:
     - assets/rive/
     - assets/images/
