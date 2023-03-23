@@ -1,109 +1,7 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:znanija_clone/domain/api_client.dart';
 import 'package:znanija_clone/config/data_provider.dart';
-import 'package:znanija_clone/ui/pages/auth/register_page.dart';
-import 'package:znanija_clone/ui/pages/main_screen/main_screen_widget.dart';
-
-class AuthWidget extends StatelessWidget {
-  const AuthWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Stack(
-        clipBehavior: Clip.none,
-        children: [
-          Column(
-            children: [
-              const Spacer(flex: 1),
-              const Text(
-                "You are welcome",
-                style: TextStyle(fontSize: 27, fontFamily: "Poppins"),
-              ),
-              const Spacer(flex: 1),
-              const FormWidget(),
-              const Spacer(flex: 1),
-              Row(
-                children: const [
-                  Expanded(child: Divider()),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      "OR",
-                      style: TextStyle(
-                        color: Colors.black38,
-                      ),
-                    ),
-                  ),
-                  Expanded(child: Divider()),
-                ],
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(vertical: 24),
-                child: Text(
-                  "Sign up with Facebook, Apple or Google",
-                  style: TextStyle(color: Colors.black54),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.facebook,
-                      size: 30,
-                      color: Colors.blue,
-                    ),
-                  ),
-                  IconButton(
-                      padding: const EdgeInsets.only(top: 2),
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.g_mobiledata,
-                        size: 45,
-                      )),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.apple,
-                      size: 32,
-                      color: Colors.black,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text("Don't have an account ?   "),
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => RegisterPage(),
-                        ),
-                      );
-                    },
-                    child: const Text(
-                      'Sign up',
-                    ),
-                  ),
-                ],
-              ),
-              const Spacer(flex: 2),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-}
+import 'package:znanija_clone/domain/api_client.dart';
+import 'package:znanija_clone/pages/main_page.dart';
 
 class FormWidget extends StatefulWidget {
   const FormWidget({Key? key}) : super(key: key);
@@ -123,16 +21,6 @@ class _FormWidgetState extends State<FormWidget> {
 
   void loginUser() async {
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      // var reqBody = {
-      //   "email": emailController.text,
-      //   "password": passwordController.text
-      // };
-      // var response = await http.post(Uri.parse(login),
-      //     headers: {"Content-Type": "application/json"},
-      //     body: jsonEncode(reqBody));
-      // var jsonResponse = jsonDecode(response.body);
-      // var myToken = jsonResponse['token'];
-
       try {
         myToken = await apiClient.signIn(
           email: emailController.text,
@@ -144,10 +32,11 @@ class _FormWidgetState extends State<FormWidget> {
 
       TokenDataProvider().setToken(myToken);
 
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => MainScreenWidget(token: myToken)));
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        MainPage.routeName,
+        (_) => false,
+        arguments: myToken,
+      );
     } else {
       errorText = 'Заполните логин или пароль';
     }

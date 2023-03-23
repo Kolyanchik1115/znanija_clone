@@ -9,3 +9,20 @@ abstract class AppInputBorder {
     ),
   );
 }
+
+ThemeData theme() {
+  return ThemeData(
+    scaffoldBackgroundColor: const Color(0xFFEEF1F8),
+    primarySwatch: Colors.blue,
+    fontFamily: "Intel",
+    inputDecorationTheme: const InputDecorationTheme(
+      filled: true,
+      fillColor: Colors.white,
+      errorStyle: TextStyle(height: 0),
+      border: AppInputBorder.defaultInputBorder,
+      enabledBorder: AppInputBorder.defaultInputBorder,
+      focusedBorder: AppInputBorder.defaultInputBorder,
+      errorBorder: AppInputBorder.defaultInputBorder,
+    ),
+  );
+}

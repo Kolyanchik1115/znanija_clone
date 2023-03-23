@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:znanija_clone/config/data_provider.dart';
-import 'package:znanija_clone/ui/pages/main_screen/main_screen_widget.dart';
-import 'package:znanija_clone/ui/pages/start_screen/start_screen.dart';
+import 'package:znanija_clone/pages/main_page.dart';
+import 'package:znanija_clone/routes/app_routes.dart';
+import 'package:znanija_clone/pages/splash/splash_page.dart';
 import 'package:znanija_clone/resources/theme/borders.dart';
+import 'package:znanija_clone/utils/helper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final _tokenProvider = TokenDataProvider();
-  final token = await _tokenProvider.getToken();
-
-  runApp(MyApp(token: token));
+  final tokenProvider = TokenDataProvider();
+  runApp(MyApp(token: await tokenProvider.getToken()));
 }
 
 class MyApp extends StatelessWidget {
@@ -21,23 +20,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          scaffoldBackgroundColor: const Color(0xFFEEF1F8),
-          primarySwatch: Colors.blue,
-          fontFamily: "Intel",
-          inputDecorationTheme: const InputDecorationTheme(
-            filled: true,
-            fillColor: Colors.white,
-            errorStyle: TextStyle(height: 0),
-            border: AppInputBorder.defaultInputBorder,
-            enabledBorder: AppInputBorder.defaultInputBorder,
-            focusedBorder: AppInputBorder.defaultInputBorder,
-            errorBorder: AppInputBorder.defaultInputBorder,
-          ),
-        ),
-        home: token != null && JwtDecoder.isExpired(token) == false
-            ? MainScreenWidget(token: token)
-            : const StartScreen());
+      debugShowCheckedModeBanner: false,
+      theme: theme(),
+      onGenerateRoute: AppRouter.onGeneratedRoute,
+      home: isAuth(token) ? MainPage(token: token) : const SplashPage(),
+    );
   }
 }

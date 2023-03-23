@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:znanija_clone/config/data_provider.dart';
-import 'package:znanija_clone/ui/pages/start_screen/start_screen.dart';
+import 'package:znanija_clone/pages/splash/splash_page.dart';
 
-class MainScreenWidget extends StatefulWidget {
+class MainPage extends StatefulWidget {
+  static const routeName = '/main_page';
   final String token;
-  const MainScreenWidget({Key? key, required this.token}) : super(key: key);
+  const MainPage({Key? key, required this.token}) : super(key: key);
 
   @override
-  MainScreenWidgetState createState() => MainScreenWidgetState();
+  MainPageState createState() => MainPageState();
 }
 
-class MainScreenWidgetState extends State<MainScreenWidget> {
+class MainPageState extends State<MainPage> {
   int _selectedTab = 0;
 
   void onSelectTab(int index) {
@@ -32,12 +33,9 @@ class MainScreenWidgetState extends State<MainScreenWidget> {
             child: ElevatedButton(
               onPressed: () async {
                 TokenDataProvider().deleteToken();
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const StartScreen(),
-                  ),
-                  ModalRoute.withName(''),
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                  SplashPage.routeName,
+                  (_) => false,
                 );
               },
               child: const Text(''),

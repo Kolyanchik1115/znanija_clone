@@ -1,14 +1,16 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 
-import 'package:http/http.dart' as http;
 import 'package:znanija_clone/domain/api_client.dart';
 import 'package:znanija_clone/config/data_provider.dart';
-import 'package:znanija_clone/ui/pages/main_screen/main_screen_widget.dart';
+import 'package:znanija_clone/pages/main_page.dart';
 
 class RegisterPage extends StatefulWidget {
+  static const routeName = '/register_page';
+
+  const RegisterPage({super.key});
+
   @override
-  _RegisterPageState createState() => _RegisterPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
@@ -24,17 +26,6 @@ class _RegisterPageState extends State<RegisterPage> {
     if (emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty &&
         roleController.text.isNotEmpty) {
-      // var regBody = {
-      //   "email": emailController.text,
-      //   "password": passwordController.text,
-      //   "role": roleController.text
-      // };
-      // var response = await http.post(Uri.parse(registration),
-      //     headers: {"Content-Type": "application/json"},
-      //     body: jsonEncode(regBody));
-      // var jsonResponse = jsonDecode(response.body);
-      // var token = jsonResponse['token'];
-
       try {
         myToken = await apiClient.signUp(
           email: emailController.text,
@@ -45,10 +36,11 @@ class _RegisterPageState extends State<RegisterPage> {
 
       TokenDataProvider().setToken(myToken);
 
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => MainScreenWidget(token: myToken)));
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        MainPage.routeName,
+        (_) => false,
+        arguments: myToken,
+      );
     } else {
       setState(() {
         _isNotValidate = true;

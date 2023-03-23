@@ -2,16 +2,18 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
-import 'package:znanija_clone/ui/pages/auth/auth_widget.dart';
+import 'package:znanija_clone/pages/auth/login_page.dart';
 
-class StartScreen extends StatefulWidget {
-  const StartScreen({super.key});
+class SplashPage extends StatefulWidget {
+  static const routeName = '/';
+
+  const SplashPage({super.key});
 
   @override
-  State<StartScreen> createState() => _StartScreenState();
+  State<SplashPage> createState() => _SplashPageState();
 }
 
-class _StartScreenState extends State<StartScreen> {
+class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +89,7 @@ class _StartScreenState extends State<StartScreen> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(40)),
                               ),
-                              child: const AuthWidget(),
+                              child: const LoginPage(),
                             ),
                           );
                         },
