@@ -1,13 +1,12 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:znanija_clone/config/config.dart';
 
 class ApiClient {
   final _client = HttpClient();
 
-  static const _host = 'http://localhost:7001/api';
-
   Uri _makeUri(String path) {
-    final uri = Uri.parse('$_host$path');
+    final uri = Uri.parse('${Config.host}$path');
     return uri;
   }
 

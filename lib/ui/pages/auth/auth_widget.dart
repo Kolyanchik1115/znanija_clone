@@ -1,8 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:znanija_clone/config/api_client.dart';
-import 'package:znanija_clone/config/config.dart';
+import 'package:znanija_clone/domain/api_client.dart';
 import 'package:znanija_clone/config/data_provider.dart';
 import 'package:znanija_clone/ui/pages/auth/register_page.dart';
 import 'package:znanija_clone/ui/pages/main_screen/main_screen_widget.dart';
@@ -120,43 +119,30 @@ class _FormWidgetState extends State<FormWidget> {
   String? errorText;
   bool isChecked = false;
   bool isNotValidate = false;
-  // late SharedPreferences prefs;
-  String? myToken;
-
-  @override
-  void initState() {
-    super.initState();
-    // initSharedPref();
-  }
-
-  // void initSharedPref() async {
-  //   prefs = await SharedPreferences.getInstance();
-  // }
+  late String myToken;
 
   void loginUser() async {
     if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
-      var reqBody = {
-        "email": emailController.text,
-        "password": passwordController.text
-      };
-      var response = await http.post(Uri.parse(login),
-          headers: {"Content-Type": "application/json"},
-          body: jsonEncode(reqBody));
-      var jsonResponse = jsonDecode(response.body);
-      var myToken = jsonResponse['token'];
+      // var reqBody = {
+      //   "email": emailController.text,
+      //   "password": passwordController.text
+      // };
+      // var response = await http.post(Uri.parse(login),
+      //     headers: {"Content-Type": "application/json"},
+      //     body: jsonEncode(reqBody));
+      // var jsonResponse = jsonDecode(response.body);
+      // var myToken = jsonResponse['token'];
 
-      // try {
-      //   myToken = await apiClient.signIn(
-      //     email: emailController.text,
-      //     password: passwordController.text,
-      //   );
-      // } catch (e) {
-      //   errorText = ' Неправильный логин или пароль';
-      // }
+      try {
+        myToken = await apiClient.signIn(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+      } catch (e) {
+        errorText = ' Неправильный логин или пароль';
+      }
 
       TokenDataProvider().setToken(myToken);
-
-      // prefs.setString('token', myToken);
 
       Navigator.push(
           context,

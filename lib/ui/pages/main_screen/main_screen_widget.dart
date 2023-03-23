@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:znanija_clone/config/data_provider.dart';
 import 'package:znanija_clone/ui/pages/start_screen/start_screen.dart';
 
 class MainScreenWidget extends StatefulWidget {
@@ -12,7 +12,6 @@ class MainScreenWidget extends StatefulWidget {
 
 class MainScreenWidgetState extends State<MainScreenWidget> {
   int _selectedTab = 0;
-  // late SharedPreferences prefs;
 
   void onSelectTab(int index) {
     if (_selectedTab == index) return;
@@ -32,8 +31,7 @@ class MainScreenWidgetState extends State<MainScreenWidget> {
             color: Colors.greenAccent,
             child: ElevatedButton(
               onPressed: () async {
-                // prefs = await SharedPreferences.getInstance();
-                // prefs.remove('token');
+                TokenDataProvider().deleteToken();
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(

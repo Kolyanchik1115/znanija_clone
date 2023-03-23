@@ -2,8 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
-// import 'package:shared_preferences/shared_preferences.dart';
-import 'package:znanija_clone/config/config.dart';
+import 'package:znanija_clone/domain/api_client.dart';
 import 'package:znanija_clone/config/data_provider.dart';
 import 'package:znanija_clone/ui/pages/main_screen/main_screen_widget.dart';
 
@@ -16,57 +15,46 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController roleController = TextEditingController();
+  final apiClient = ApiClient();
 
   bool _isNotValidate = false;
-  // late SharedPreferences prefs;
+  late String myToken;
 
   void registerUser() async {
     if (emailController.text.isNotEmpty &&
         passwordController.text.isNotEmpty &&
         roleController.text.isNotEmpty) {
-      var regBody = {
-        "email": emailController.text,
-        "password": passwordController.text,
-        "role": roleController.text
-      };
+      // var regBody = {
+      //   "email": emailController.text,
+      //   "password": passwordController.text,
+      //   "role": roleController.text
+      // };
+      // var response = await http.post(Uri.parse(registration),
+      //     headers: {"Content-Type": "application/json"},
+      //     body: jsonEncode(regBody));
+      // var jsonResponse = jsonDecode(response.body);
+      // var token = jsonResponse['token'];
 
-      var response = await http.post(Uri.parse(registration),
-          headers: {"Content-Type": "application/json"},
-          body: jsonEncode(regBody));
+      try {
+        myToken = await apiClient.signUp(
+          email: emailController.text,
+          password: passwordController.text,
+          role: roleController.text,
+        );
+      } catch (_) {}
 
-      var jsonResponse = jsonDecode(response.body);
+      TokenDataProvider().setToken(myToken);
 
-      var token = jsonResponse['token'];
-      TokenDataProvider().setToken(token);
-
-      // prefs.setString('token', token);
-
-      Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MainScreenWidget(
-            token: token,
-          ),
-        ),
-        ModalRoute.withName('/'),
-      );
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MainScreenWidget(token: myToken)));
     } else {
       setState(() {
         _isNotValidate = true;
       });
     }
   }
-
-  @override
-  void initState() {
-    // initSharedPref();
-
-    super.initState();
-  }
-
-  // void initSharedPref() async {
-  //   prefs = await SharedPreferences.getInstance();
-  // }
 
   @override
   Widget build(BuildContext context) {
