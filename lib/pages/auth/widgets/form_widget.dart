@@ -7,7 +7,7 @@ class FormWidget extends StatefulWidget {
   const FormWidget({Key? key}) : super(key: key);
 
   @override
-  _FormWidgetState createState() => _FormWidgetState();
+  State<FormWidget> createState() => _FormWidgetState();
 }
 
 class _FormWidgetState extends State<FormWidget> {

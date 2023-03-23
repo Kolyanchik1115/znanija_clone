@@ -17,7 +17,7 @@ class AppRouter {
         builder = (_) => const LoginPage();
         break;
       case RegisterPage.routeName:
-        builder = (_) => RegisterPage();
+        builder = (_) => const RegisterPage();
         break;
       case MainPage.routeName:
         builder = (_) => MainPage(token: arguments as String);
