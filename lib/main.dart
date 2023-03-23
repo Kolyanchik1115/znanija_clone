@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:znanija_clone/config/data_provider.dart';
 import 'package:znanija_clone/ui/pages/main_screen/main_screen_widget.dart';
 import 'package:znanija_clone/ui/pages/start_screen/start_screen.dart';
 import 'package:znanija_clone/ui/theme/borders.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  runApp(MyApp(
-    token: prefs.getString('token'),
-  ));
+  final _tokenProvider = TokenDataProvider();
+  final token = await _tokenProvider.getToken();
+
+  runApp(MyApp(token: token));
 }
 
 class MyApp extends StatelessWidget {
   final token;
+
   const MyApp({super.key, required this.token});
 
   @override

@@ -2,8 +2,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:znanija_clone/config/config.dart';
+import 'package:znanija_clone/config/data_provider.dart';
 import 'package:znanija_clone/ui/pages/main_screen/main_screen_widget.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -17,7 +18,7 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController roleController = TextEditingController();
 
   bool _isNotValidate = false;
-  late SharedPreferences prefs;
+  // late SharedPreferences prefs;
 
   void registerUser() async {
     if (emailController.text.isNotEmpty &&
@@ -36,7 +37,9 @@ class _RegisterPageState extends State<RegisterPage> {
       var jsonResponse = jsonDecode(response.body);
 
       var token = jsonResponse['token'];
-      prefs.setString('token', token);
+      TokenDataProvider().setToken(token);
+
+      // prefs.setString('token', token);
 
       Navigator.pushAndRemoveUntil(
         context,
@@ -56,14 +59,14 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   void initState() {
-    initSharedPref();
+    // initSharedPref();
 
     super.initState();
   }
 
-  void initSharedPref() async {
-    prefs = await SharedPreferences.getInstance();
-  }
+  // void initSharedPref() async {
+  //   prefs = await SharedPreferences.getInstance();
+  // }
 
   @override
   Widget build(BuildContext context) {
