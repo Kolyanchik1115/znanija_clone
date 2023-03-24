@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:znanija_clone/config/data_provider.dart';
-import 'package:znanija_clone/domain/api_client.dart';
+import 'package:znanija_clone/domain/auth_api.dart';
 import 'package:znanija_clone/pages/main_page.dart';
 
 class FormWidget extends StatefulWidget {

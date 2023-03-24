@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:znanija_clone/domain/api_client.dart';
 import 'package:znanija_clone/config/data_provider.dart';
+import 'package:znanija_clone/domain/auth_api.dart';
 import 'package:znanija_clone/pages/main_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -36,7 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
       TokenDataProvider().setToken(myToken);
 
-      Navigator.of(context).pushNamedAndRemoveUntil(
+      Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
         MainPage.routeName,
         (_) => false,
         arguments: myToken,

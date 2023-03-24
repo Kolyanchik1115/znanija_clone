@@ -1,67 +1,97 @@
 import 'package:flutter/material.dart';
-import 'package:znanija_clone/config/data_provider.dart';
-import 'package:znanija_clone/pages/splash/splash_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:znanija_clone/bloc/navigation_bloc.dart';
+import 'package:znanija_clone/pages/account/account_page.dart';
+import 'package:znanija_clone/pages/answer/answer_page.dart';
+import 'package:znanija_clone/pages/search/search_page.dart';
+import 'package:znanija_clone/routes/app_routes.dart';
 
-class MainPage extends StatefulWidget {
+class MainPage extends StatelessWidget {
+  MainPage({super.key});
+
   static const routeName = '/main_page';
-  final String token;
-  const MainPage({Key? key, required this.token}) : super(key: key);
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+  static final GlobalKey<NavigatorState> _navigatorKey =
+      GlobalKey<NavigatorState>();
 
-  @override
-  MainPageState createState() => MainPageState();
-}
+  static const List<String> _pages = [
+    SearchPage.routeName,
+    AnswerPage.routeName,
+    AccountPage.routeName,
+  ];
 
-class MainPageState extends State<MainPage> {
-  int _selectedTab = 0;
-
-  void onSelectTab(int index) {
-    if (_selectedTab == index) return;
-    setState(() {
-      _selectedTab = index;
-    });
+  void _onSelectTab(String route) {
+    if (_navigatorKey.currentState != null) {
+      _navigatorKey.currentState!.pushNamedAndRemoveUntil(
+        route,
+        (route) => false,
+      );
+    }
+  }
+  void _onSelectMenu(String route) {
+    if (_navigatorKey.currentState != null) {
+      _navigatorKey.currentState!.pushNamedAndRemoveUntil(
+        route,
+        (_) => false,
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: IndexedStack(
-        index: _selectedTab,
-        children: [
-          Container(
-            color: Colors.greenAccent,
-            child: ElevatedButton(
-              onPressed: () async {
-                TokenDataProvider().deleteToken();
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                  SplashPage.routeName,
-                  (_) => false,
-                );
-              },
-              child: const Text(''),
+    _key.currentState?.openDrawer();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => NavigationBloc(),
+        ),
+      ],
+      child: BlocConsumer<NavigationBloc, NavigationState>(
+        listener: (context, state) async {
+          if (state.status == NavigationStatus.menu) {
+            _onSelectMenu(state.route);
+          }
+
+          if (state.status == NavigationStatus.tab) {
+            _onSelectTab(state.route);
+          }
+        },
+        builder: (context, state) {
+          return Scaffold(
+            extendBody: true,
+            extendBodyBehindAppBar: true,
+            key: _key,
+            bottomNavigationBar: BottomNavigationBar(
+                currentIndex: state.currentIndex,
+                items: const [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.search),
+                    label: 'Learn',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.question_answer),
+                    label: 'Answer',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.account_box_outlined),
+                    label: 'Account',
+                  ),
+                ],
+                onTap: (index) {
+                  context.read<NavigationBloc>().add(
+                        NavigateMenu(
+                          route: _pages[index],
+                          menuIndex: index,
+                        ),
+                      );
+                }),
+            body: Navigator(
+              key: _navigatorKey,
+              initialRoute: SearchPage.routeName,
+              onGenerateRoute: AppRouter.onGeneratedRoute,
             ),
-          ),
-          Container(color: Colors.greenAccent),
-          Container(color: Colors.blueAccent),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedTab,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Learn',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.question_answer),
-            label: 'Answer',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_box_outlined),
-            label: 'Account',
-          ),
-        ],
-        onTap: onSelectTab,
+          );
+        },
       ),
     );
   }

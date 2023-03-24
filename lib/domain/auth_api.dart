@@ -5,9 +5,13 @@ import 'package:znanija_clone/config/config.dart';
 class ApiClient {
   final _client = HttpClient();
 
-  Uri _makeUri(String path) {
+  Uri _makeUri(String path, [Map<String, dynamic>? parameters]) {
     final uri = Uri.parse('${Config.host}$path');
-    return uri;
+    if (parameters != null) {
+      return uri.replace(queryParameters: parameters);
+    } else {
+      return uri;
+    }
   }
 
   Future<String> signUp({
@@ -50,6 +54,7 @@ class ApiClient {
     request.headers.contentType = ContentType.json;
     request.write(jsonEncode(parameters));
     final response = await request.close();
+
     final json = (await response.jsonDecode()) as Map<String, dynamic>;
 
     final token = json['token'] as String;

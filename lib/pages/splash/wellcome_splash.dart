@@ -4,16 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'package:znanija_clone/pages/auth/login_page.dart';
 
-class SplashPage extends StatefulWidget {
-  static const routeName = '/';
+class NewUserSplash extends StatelessWidget {
+  static const routeName = '/new_user';
 
-  const SplashPage({super.key});
+  const NewUserSplash({super.key});
 
-  @override
-  State<SplashPage> createState() => _SplashPageState();
-}
-
-class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
