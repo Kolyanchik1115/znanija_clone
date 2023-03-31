@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:znanija_clone/config/data_provider.dart';
 
@@ -8,6 +10,7 @@ Future<bool> haveToken() async {
 
 Future<String?> getToken() async {
   final String? token = await TokenDataProvider().getToken();
+  log(token!);
   return token;
 }
 

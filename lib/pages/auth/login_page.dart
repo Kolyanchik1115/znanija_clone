@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
 
 import 'package:znanija_clone/pages/auth/register_page.dart';
-import 'package:znanija_clone/pages/auth/widgets/form_widget.dart';
+import 'package:znanija_clone/pages/auth/widgets/login_form.dart';
 
 class LoginPage extends StatelessWidget {
   static const routeName = '/login_page';
@@ -23,7 +25,10 @@ class LoginPage extends StatelessWidget {
                 style: TextStyle(fontSize: 27, fontFamily: "Poppins"),
               ),
               const Spacer(flex: 1),
-              const FormWidget(),
+              BlocProvider(
+                create: (context) => AuthBloc(),
+                child: const LoginForm(),
+              ),
               const Spacer(flex: 1),
               Row(
                 children: const [
@@ -82,13 +87,26 @@ class LoginPage extends StatelessWidget {
                   const Text("Don't have an account ?   "),
                   InkWell(
                     onTap: () {
-                      Navigator.of(context).pushNamedAndRemoveUntil(
-                        RegisterPage.routeName,
-                        (_) => true,
+                      showGeneralDialog(
+                        barrierDismissible: true,
+                        barrierLabel: 'Sign Up',
+                        context: context,
+                        pageBuilder: (_, __, ___) => Container(
+                          height: 620,
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                            vertical: 120,
+                          ),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.all(Radius.circular(40)),
+                          ),
+                          child: const RegistrationPage(),
+                        ),
                       );
                     },
                     child: const Text(
-                      'Sign up',
+                      'Sign Up',
                     ),
                   ),
                 ],

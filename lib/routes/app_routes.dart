@@ -23,8 +23,8 @@ class AppRouter {
       case LoginPage.routeName:
         builder = (_) => const LoginPage();
         break;
-      case RegisterPage.routeName:
-        builder = (_) => const RegisterPage();
+      case RegistrationPage.routeName:
+        builder = (_) => const RegistrationPage();
         break;
       case MainPage.routeName:
         builder = (_) => MainPage();

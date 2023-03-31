@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:znanija_clone/bloc/navigation_bloc.dart';
+import 'package:znanija_clone/blocs/navigation/navigation_bloc.dart';
 import 'package:znanija_clone/pages/account/account_page.dart';
 import 'package:znanija_clone/pages/answer/answer_page.dart';
 import 'package:znanija_clone/pages/search/search_page.dart';
@@ -28,6 +28,7 @@ class MainPage extends StatelessWidget {
       );
     }
   }
+
   void _onSelectMenu(String route) {
     if (_navigatorKey.currentState != null) {
       _navigatorKey.currentState!.pushNamedAndRemoveUntil(
