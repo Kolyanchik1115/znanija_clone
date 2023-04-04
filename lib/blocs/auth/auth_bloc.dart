@@ -31,6 +31,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     });
     on<AuthCheckUserExist>((event, emit) async {
       final user = await AuthenticateLocalData().getUserFromSecureStorage();
+
       if (user != null) {
         emit(state.copyWith(status: AuthStatus.gotUser, user: user));
       } else {

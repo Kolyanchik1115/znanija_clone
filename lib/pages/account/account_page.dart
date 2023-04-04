@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
 
+import 'package:znanija_clone/pages/splash/wellcome_splash.dart';
+
 class AccountPage extends StatelessWidget {
   static const routeName = '/account_page';
 
@@ -26,11 +28,18 @@ class AccountPage extends StatelessWidget {
             ),
             actions: [
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  context.read<AuthBloc>().add(AuthLogoutEvent());
+                  Navigator.of(context, rootNavigator: true)
+                      .pushNamedAndRemoveUntil(
+                    NewUserSplash.routeName,
+                    (_) => false,
+                  );
+                },
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Icon(
-                    Icons.workspace_premium,
+                    Icons.logout,
                     size: 20,
                   ),
                 ),

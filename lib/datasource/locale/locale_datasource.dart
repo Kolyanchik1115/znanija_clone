@@ -20,21 +20,19 @@ class AuthenticateLocalData {
 
   Future<UserInfoModel?> getUserFromSecureStorage() async {
     final userModelFromStorage = await _secureStorage.read(key: 'user');
-    final UserInfoModel userInfoModel = UserInfoModel.fromJson(
-      jsonDecode(userModelFromStorage!),
-    );
-    log('Received all secure data');
-    return userInfoModel;
+    if (userModelFromStorage != null) {
+      final UserInfoModel userInfoModel = UserInfoModel.fromJson(
+        jsonDecode(userModelFromStorage),
+      );
+      log('Received all secure data');
+      return userInfoModel;
+    }
+    return null;
   }
 
   Future<void> clearStorage() async {
     await _secureStorage.deleteAll();
     log('Secure storage has been cleared');
-  }
-
-  Future<bool> isUserLoggedIn() async {
-    final user = await _secureStorage.read(key: 'user');
-    return user != null;
   }
 
   bool isExpired({required String jwt}) {
