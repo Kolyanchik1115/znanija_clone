@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
 import 'package:znanija_clone/routes/app_routes.dart';
 
 import 'package:znanija_clone/resources/theme/borders.dart';
@@ -13,10 +15,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: theme(),
-      onGenerateRoute: AppRouter.onGeneratedRoute,
+    return BlocProvider(
+      create: (context) => AuthBloc()..add(AuthCheckUserExist()),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: theme(),
+        onGenerateRoute: AppRouter.onGeneratedRoute,
+      ),
     );
   }
 }

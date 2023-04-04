@@ -20,15 +20,6 @@ class MainPage extends StatelessWidget {
     AccountPage.routeName,
   ];
 
-  void _onSelectTab(String route) {
-    if (_navigatorKey.currentState != null) {
-      _navigatorKey.currentState!.pushNamedAndRemoveUntil(
-        route,
-        (route) => false,
-      );
-    }
-  }
-
   void _onSelectMenu(String route) {
     if (_navigatorKey.currentState != null) {
       _navigatorKey.currentState!.pushNamedAndRemoveUntil(
@@ -51,10 +42,6 @@ class MainPage extends StatelessWidget {
         listener: (context, state) async {
           if (state.status == NavigationStatus.menu) {
             _onSelectMenu(state.route);
-          }
-
-          if (state.status == NavigationStatus.tab) {
-            _onSelectTab(state.route);
           }
         },
         builder: (context, state) {

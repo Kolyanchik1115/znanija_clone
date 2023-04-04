@@ -1,17 +1,29 @@
 part of 'auth_bloc.dart';
 
-class AuthState {
-  final String token;
+enum AuthStatus { initial, gotUser, noUser }
 
-  AuthState({
-    this.token = '',
+class AuthState extends Equatable {
+  final UserInfoModel user;
+  final AuthStatus status;
+
+  const AuthState({
+    this.status = AuthStatus.initial,
+    this.user = const UserInfoModel(
+      email: '',
+      role: '',
+    ),
   });
 
   AuthState copyWith({
-    String? token,
+    UserInfoModel? user,
+    AuthStatus? status,
   }) {
     return AuthState(
-      token: token ?? this.token,
+      user: user ?? this.user,
+      status: status ?? this.status,
     );
   }
+
+  @override
+  List<Object> get props => [user, status];
 }

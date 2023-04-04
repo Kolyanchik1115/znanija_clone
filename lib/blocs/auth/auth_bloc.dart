@@ -1,36 +1,45 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:znanija_clone/config/data_provider.dart';
-import 'package:znanija_clone/domain/auth_api.dart';
+import 'package:znanija_clone/datasource/locale/locale_datasource.dart';
+import 'package:znanija_clone/datasource/remote/remote_datasource.dart';
+import 'package:znanija_clone/models/user_model.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final _tokenDataProvider = TokenDataProvider();
   final _apiClient = ApiClient();
 
-  AuthBloc() : super(AuthState()) {
+  AuthBloc() : super(const AuthState()) {
     on<AuthLoginEvent>((event, emit) async {
-      final String logToken = await _apiClient.signIn(
+      final user = await _apiClient.signIn(
         email: event.email,
         password: event.password,
       );
-      await TokenDataProvider().setToken(logToken);
-      emit(state.copyWith(token: logToken));
+      await AuthenticateLocalData().saveUserToSecureStorage(userModel: user);
+      emit(state.copyWith(user: user));
     });
 
     on<AuthRegistrationEvent>((event, emit) async {
-      final String regToken = await _apiClient.signUp(
-        email: event.login,
+      final user = await _apiClient.signUp(
+        email: event.email,
         password: event.password,
         role: event.role,
       );
-      await TokenDataProvider().setToken(regToken);
-      emit(state.copyWith(token: regToken));
+      await AuthenticateLocalData().saveUserToSecureStorage(userModel: user);
+      emit(state.copyWith(user: user));
+    });
+    on<AuthCheckUserExist>((event, emit) async {
+      final user = await AuthenticateLocalData().getUserFromSecureStorage();
+      if (user != null) {
+        emit(state.copyWith(status: AuthStatus.gotUser, user: user));
+      } else {
+        emit(state.copyWith(status: AuthStatus.noUser));
+      }
     });
 
     on<AuthLogoutEvent>((event, emit) async {
-      await _tokenDataProvider.deleteToken();
+      await AuthenticateLocalData().clearStorage();
     });
   }
 }

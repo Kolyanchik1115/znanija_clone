@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
 
 import 'package:znanija_clone/pages/auth/register_page.dart';
 import 'package:znanija_clone/pages/auth/widgets/login_form.dart';
@@ -25,10 +23,7 @@ class LoginPage extends StatelessWidget {
                 style: TextStyle(fontSize: 27, fontFamily: "Poppins"),
               ),
               const Spacer(flex: 1),
-              BlocProvider(
-                create: (context) => AuthBloc(),
-                child: const LoginForm(),
-              ),
+              const LoginForm(),
               const Spacer(flex: 1),
               Row(
                 children: const [

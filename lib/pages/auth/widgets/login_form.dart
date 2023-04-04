@@ -52,7 +52,6 @@ class _LoginFormState extends State<LoginForm> {
                             .pushNamedAndRemoveUntil(
                           MainPage.routeName,
                           (_) => false,
-                          arguments: state.token,
                         );
                       },
                       style: ElevatedButton.styleFrom(

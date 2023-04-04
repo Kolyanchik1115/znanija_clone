@@ -50,7 +50,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     child: ElevatedButton(
                       onPressed: () {
                         context.read<AuthBloc>().add(AuthRegistrationEvent(
-                              login: emailController.text,
+                              email: emailController.text,
                               password: passwordController.text,
                               role: roleController.text,
                             ));
@@ -58,7 +58,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
                             .pushNamedAndRemoveUntil(
                           MainPage.routeName,
                           (_) => false,
-                          arguments: state.token,
                         );
                       },
                       style: ElevatedButton.styleFrom(

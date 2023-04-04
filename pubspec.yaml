@@ -15,10 +15,13 @@ dependencies:
   cupertino_icons: ^1.0.2
 
   rive: ^0.10.1
-  http: ^0.13.5
   jwt_decoder: ^2.0.1
   flutter_secure_storage: ^8.0.0
   flutter_bloc: ^8.1.2
+  dio: ^5.1.1
+  intl: ^0.18.0
+  json_annotation: ^4.8.0
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -32,8 +35,6 @@ flutter:
   assets:
     - assets/rive/
     - assets/images/
-
-  #   - images/a_dot_ham.jpeg
 
   fonts:
     - family: Intel
