@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
-
-import 'package:znanija_clone/pages/splash/new_user_splash/new_user_splash_page.dart';
+import 'package:znanija_clone/pages/settings/settings_page.dart';
 
 class AccountPage extends StatelessWidget {
   static const routeName = '/account_page';
@@ -26,25 +25,6 @@ class AccountPage extends StatelessWidget {
                 bottom: Radius.circular(30),
               ),
             ),
-            actions: [
-              InkWell(
-                onTap: () {
-                  context.read<AuthBloc>().add(AuthLogoutEvent());
-                  Navigator.of(context, rootNavigator: true)
-                      .pushNamedAndRemoveUntil(
-                    NewUserSplashPage.routeName,
-                    (_) => false,
-                  );
-                },
-                child: const Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Icon(
-                    Icons.logout,
-                    size: 20,
-                  ),
-                ),
-              ),
-            ],
             bottom: PreferredSize(
               preferredSize: const Size.fromHeight(110.0),
               child: Container(
@@ -52,28 +32,13 @@ class AccountPage extends StatelessWidget {
                 child: Row(
                   children: [
                     Stack(
-                      children: [
-                        const CircleAvatar(
+                      children: const [
+                        CircleAvatar(
                           radius: 32,
                           backgroundColor: Colors.white,
+                          foregroundColor: Color.fromARGB(255, 58, 183, 137),
                           child: Icon(Icons.person_outline_rounded),
                         ),
-                        Positioned(
-                            bottom: 1,
-                            right: 1,
-                            child: Container(
-                              height: 30,
-                              width: 30,
-                              decoration: const BoxDecoration(
-                                  color: Color.fromARGB(255, 0, 255, 162),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(20))),
-                              child: const Icon(
-                                Icons.edit,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                            ))
                       ],
                     ),
                     Container(
@@ -97,15 +62,84 @@ class AccountPage extends StatelessWidget {
                           ),
                         ],
                       ),
+                    ),
+                    const SizedBox(width: 50),
+                    Container(
+                      margin: const EdgeInsets.only(left: 20),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          IconButton(
+                            onPressed: () {},
+                            icon: const Icon(Icons.edit, color: Colors.white),
+                          )
+                        ],
+                      ),
                     )
                   ],
                 ),
               ),
             ),
           ),
-          body: const Center(),
+          body: ListView(
+            children: ListTile.divideTiles(
+              context: context,
+              tiles: [
+                CustomListTile(
+                  title: 'Notification',
+                  onTap: () {},
+                  icon: const Icon(Icons.notifications),
+                ),
+                CustomListTile(
+                  title: 'My asnwers',
+                  onTap: () {},
+                  icon: const Icon(Icons.message),
+                ),
+                CustomListTile(
+                  title: 'My quetions',
+                  onTap: () {},
+                  icon: const Icon(Icons.question_mark),
+                ),
+                CustomListTile(
+                  title: 'Saved answers',
+                  onTap: () {},
+                  icon: const Icon(Icons.star),
+                ),
+                CustomListTile(
+                  title: 'Settings',
+                  onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
+                      SettingsPage.routeName, (route) => true),
+                  icon: const Icon(Icons.settings),
+                ),
+              ],
+            ).toList(),
+          ),
         );
       },
+    );
+  }
+}
+
+class CustomListTile extends StatelessWidget {
+  final String title;
+  final VoidCallback onTap;
+  final Icon icon;
+  const CustomListTile({
+    super.key,
+    required this.title,
+    required this.onTap,
+    required this.icon,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      contentPadding:
+          const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      leading: icon,
+      title: Text(title),
+      onTap: onTap,
     );
   }
 }

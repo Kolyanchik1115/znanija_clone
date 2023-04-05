@@ -4,6 +4,7 @@ import 'package:znanija_clone/blocs/navigation/navigation_bloc.dart';
 import 'package:znanija_clone/pages/account/account_page.dart';
 import 'package:znanija_clone/pages/answer/answer_page.dart';
 import 'package:znanija_clone/pages/search/search_page.dart';
+import 'package:znanija_clone/pages/settings/settings_page.dart';
 import 'package:znanija_clone/routes/app_routes.dart';
 
 class MainPage extends StatelessWidget {
