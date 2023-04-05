@@ -2,7 +2,7 @@ part of 'navigation_bloc.dart';
 
 enum NavigationStatus { initial, menu, tab }
 
-class NavigationState {
+class NavigationState extends Equatable {
   final NavigationStatus status;
   final int currentIndex;
   final String route;
@@ -24,4 +24,7 @@ class NavigationState {
       route: route ?? this.route,
     );
   }
+
+  @override
+  List<Object> get props => [status, currentIndex, route];
 }

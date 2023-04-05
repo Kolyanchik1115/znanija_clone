@@ -5,8 +5,8 @@ import 'package:znanija_clone/pages/auth/login_page.dart';
 import 'package:znanija_clone/pages/auth/register_page.dart';
 import 'package:znanija_clone/pages/search/search_page.dart';
 import 'package:znanija_clone/pages/main_page.dart';
-import 'package:znanija_clone/pages/splash/wellcome_splash.dart';
-import 'package:znanija_clone/pages/splash/start_splash.dart';
+import 'package:znanija_clone/pages/splash/new_user_splash/new_user_splash_page.dart';
+import 'package:znanija_clone/pages/splash/start_splash/start_splash_page.dart';
 
 class AppRouter {
   static Route onGeneratedRoute(RouteSettings settings) {
@@ -17,8 +17,8 @@ class AppRouter {
       case SplashPage.routeName:
         builder = (_) => const SplashPage();
         break;
-      case NewUserSplash.routeName:
-        builder = (_) => const NewUserSplash();
+      case NewUserSplashPage.routeName:
+        builder = (_) => const NewUserSplashPage();
         break;
       case LoginPage.routeName:
         builder = (_) => const LoginPage();

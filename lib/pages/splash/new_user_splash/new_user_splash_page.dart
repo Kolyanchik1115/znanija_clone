@@ -3,11 +3,12 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 import 'package:znanija_clone/pages/auth/login_page.dart';
+import 'package:znanija_clone/pages/splash/new_user_splash/widgets/wellcome_widget.dart';
 
-class NewUserSplash extends StatelessWidget {
+class NewUserSplashPage extends StatelessWidget {
   static const routeName = '/new_user';
 
-  const NewUserSplash({super.key});
+  const NewUserSplashPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -107,60 +108,6 @@ class NewUserSplash extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class WelcomeWidget extends StatelessWidget {
-  const WelcomeWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const Text(
-              'ASK QUESTIONS',
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(
-              width: 130,
-              height: 130,
-              child: Image.asset('assets/images/quetion.png'),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            SizedBox(
-              width: 130,
-              height: 130,
-              child: Image.asset('assets/images/answer.png'),
-            ),
-            const Text(
-              'GIVE ANSWERS',
-              style: TextStyle(fontSize: 20),
-            ),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const Text(
-              'GET REAL MONEY',
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(
-              width: 130,
-              height: 130,
-              child: Image.asset('assets/images/money.png'),
-            ),
-          ],
-        )
-      ],
     );
   }
 }

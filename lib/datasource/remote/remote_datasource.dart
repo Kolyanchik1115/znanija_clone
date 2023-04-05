@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:znanija_clone/config/config.dart';
+import 'package:znanija_clone/common/config.dart';
 import 'package:znanija_clone/models/user_model.dart';
 
 class ApiClient {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
 import 'package:znanija_clone/pages/main_page.dart';
-import 'package:znanija_clone/pages/splash/wellcome_splash.dart';
+import 'package:znanija_clone/pages/splash/new_user_splash/new_user_splash_page.dart';
 
 class SplashPage extends StatelessWidget {
   static const routeName = '/';
@@ -23,7 +23,7 @@ class SplashPage extends StatelessWidget {
         } else if (state.status == AuthStatus.noUser) {
           Future.delayed(const Duration(seconds: 2), () {
             Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
-              NewUserSplash.routeName,
+              NewUserSplashPage.routeName,
               (_) => false,
             );
           });

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
 
-import 'package:znanija_clone/pages/splash/wellcome_splash.dart';
+import 'package:znanija_clone/pages/splash/new_user_splash/new_user_splash_page.dart';
 
 class AccountPage extends StatelessWidget {
   static const routeName = '/account_page';
@@ -32,7 +32,7 @@ class AccountPage extends StatelessWidget {
                   context.read<AuthBloc>().add(AuthLogoutEvent());
                   Navigator.of(context, rootNavigator: true)
                       .pushNamedAndRemoveUntil(
-                    NewUserSplash.routeName,
+                    NewUserSplashPage.routeName,
                     (_) => false,
                   );
                 },

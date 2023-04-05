@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
+import 'package:znanija_clone/common/theme/borders.dart';
 import 'package:znanija_clone/routes/app_routes.dart';
 
-import 'package:znanija_clone/resources/theme/borders.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+void main() {
   runApp(const MyApp());
 }
 
