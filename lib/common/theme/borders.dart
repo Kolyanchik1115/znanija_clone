@@ -10,10 +10,15 @@ abstract class AppInputBorder {
   );
 }
 
-ThemeData theme() {
-  return ThemeData(
+enum AppTheme {
+  darkTheme,
+  lightTheme,
+}
+
+final appThemeData = {
+  AppTheme.lightTheme: ThemeData(
     scaffoldBackgroundColor: const Color(0xFFEEF1F8),
-    primarySwatch: Colors.blue,
+    primarySwatch: Colors.cyan,
     fontFamily: "Intel",
     inputDecorationTheme: const InputDecorationTheme(
       filled: true,
@@ -24,5 +29,19 @@ ThemeData theme() {
       focusedBorder: AppInputBorder.defaultInputBorder,
       errorBorder: AppInputBorder.defaultInputBorder,
     ),
-  );
-}
+  ),
+  AppTheme.darkTheme: ThemeData(
+    scaffoldBackgroundColor: const Color.fromARGB(255, 6, 73, 231),
+    primarySwatch: Colors.orange,
+    fontFamily: "Intel",
+    inputDecorationTheme: const InputDecorationTheme(
+      filled: true,
+      fillColor: Colors.black,
+      errorStyle: TextStyle(height: 0),
+      border: AppInputBorder.defaultInputBorder,
+      enabledBorder: AppInputBorder.defaultInputBorder,
+      focusedBorder: AppInputBorder.defaultInputBorder,
+      errorBorder: AppInputBorder.defaultInputBorder,
+    ),
+  ),
+};

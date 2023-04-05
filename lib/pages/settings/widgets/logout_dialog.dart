@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
 import 'package:znanija_clone/pages/splash/new_user_splash/new_user_splash_page.dart';
 
-Future<void> showDialogDeleteAcc(BuildContext context) async {
+Future<void> showLogoutDialog(BuildContext context) async {
   await showDialog(
     context: context,
     builder: (context) {

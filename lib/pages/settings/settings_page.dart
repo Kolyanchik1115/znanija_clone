@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:znanija_clone/pages/account/account_page.dart';
 import 'package:znanija_clone/pages/settings/widgets/logout_dialog.dart';
+import 'package:znanija_clone/pages/settings/widgets/theme_dialog.dart';
 
 class SettingsPage extends StatelessWidget {
   static const routeName = '/settings';
@@ -52,7 +53,9 @@ class SettingsPage extends StatelessWidget {
             ),
             CustomListTile(
               title: 'Theme',
-              onTap: () {},
+              onTap: () {
+                showThemeDialog(context);
+              },
               icon: const Icon(
                 Icons.palette,
                 color: Colors.black,
@@ -80,7 +83,7 @@ class SettingsPage extends StatelessWidget {
             CustomListTile(
               title: 'Log out',
               onTap: () {
-                showDialogDeleteAcc(context);
+                showLogoutDialog(context);
               },
               icon: const Icon(
                 Icons.logout_rounded,
