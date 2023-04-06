@@ -17,12 +17,14 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthBloc()..add(AuthCheckUserExist()),
       child: BlocProvider(
-        create: (context) => SettingsBloc(),
+        create: (context) => SettingsBloc()..add(ThemeCheckExist()),
         child: BlocBuilder<SettingsBloc, SettingsState>(
           builder: (context, state) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              theme: appThemeData[state.theme],
+              theme: state.theme == AppTheme.lightTheme
+                  ? appThemeData[AppTheme.lightTheme]
+                  : appThemeData[AppTheme.darkTheme],
               onGenerateRoute: AppRouter.onGeneratedRoute,
             );
           },

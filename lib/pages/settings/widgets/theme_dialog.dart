@@ -26,9 +26,9 @@ Future<void> showThemeDialog(BuildContext context) async {
                         groupValue: groupValue,
                         title: const Text("Light theme"),
                         onChanged: (newValue) {
-                          context
-                              .read<SettingsBloc>()
-                              .add(ChangeLightThemeEvent());
+                          context.read<SettingsBloc>().add(
+                              const ChangeThemeEvent(
+                                  theme: AppTheme.lightTheme));
                         },
                         activeColor: Colors.greenAccent,
                         selected: false,
@@ -38,9 +38,9 @@ Future<void> showThemeDialog(BuildContext context) async {
                         groupValue: groupValue,
                         title: const Text("Dark theme"),
                         onChanged: (newValue) {
-                          context
-                              .read<SettingsBloc>()
-                              .add(ChangeDarkThemeEvent());
+                          context.read<SettingsBloc>().add(
+                              const ChangeThemeEvent(
+                                  theme: AppTheme.darkTheme));
                         },
                         activeColor: Colors.black,
                         selected: false,

@@ -10,29 +10,26 @@ class AuthenticateLocalData {
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
   final host = Config.host;
 
-  Future<void> saveUserToSecureStorage({
-    required UserInfoModel userModel,
-  }) async {
-    final jsonUserModel = jsonEncode(userModel);
-    await _secureStorage.write(key: 'user', value: jsonUserModel);
-    log('Successful: User saved successfully');
-  }
-
   Future<UserInfoModel?> getUserFromSecureStorage() async {
     final userModelFromStorage = await _secureStorage.read(key: 'user');
     if (userModelFromStorage != null) {
       final UserInfoModel userInfoModel = UserInfoModel.fromJson(
         jsonDecode(userModelFromStorage),
       );
-      log('Received all secure data');
       return userInfoModel;
     }
     return null;
   }
 
+  Future<void> saveUserToSecureStorage({
+    required UserInfoModel userModel,
+  }) async {
+    final jsonUserModel = jsonEncode(userModel);
+    await _secureStorage.write(key: 'user', value: jsonUserModel);
+  }
+
   Future<void> clearStorage() async {
     await _secureStorage.deleteAll();
-    log('Secure storage has been cleared');
   }
 
   bool isExpired({required String jwt}) {

@@ -1,6 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:znanija_clone/datasource/locale/locale_datasource.dart';
+import 'package:znanija_clone/common/theme/borders.dart';
+import 'package:znanija_clone/datasource/locale/auth_locale_datasource.dart';
+import 'package:znanija_clone/datasource/locale/theme_locale_datasource.dart';
 import 'package:znanija_clone/datasource/remote/remote_datasource.dart';
 import 'package:znanija_clone/models/user_model.dart';
 
@@ -33,7 +36,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final user = await AuthenticateLocalData().getUserFromSecureStorage();
 
       if (user != null) {
-        emit(state.copyWith(status: AuthStatus.gotUser, user: user));
+        emit(state.copyWith(
+            status: AuthStatus.gotUser, user: user));
       } else {
         emit(state.copyWith(status: AuthStatus.noUser));
       }

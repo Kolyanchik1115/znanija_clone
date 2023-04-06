@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+enum AppTheme {
+  darkTheme,
+  lightTheme,
+}
+
 abstract class AppInputBorder {
   static const defaultInputBorder = OutlineInputBorder(
     borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -8,11 +13,6 @@ abstract class AppInputBorder {
       width: 1,
     ),
   );
-}
-
-enum AppTheme {
-  darkTheme,
-  lightTheme,
 }
 
 final appThemeData = {
@@ -31,12 +31,12 @@ final appThemeData = {
     ),
   ),
   AppTheme.darkTheme: ThemeData(
-    scaffoldBackgroundColor: const Color.fromARGB(255, 6, 73, 231),
-    primarySwatch: Colors.orange,
+    scaffoldBackgroundColor: Colors.white,
+    primarySwatch: Colors.deepPurple,
     fontFamily: "Intel",
     inputDecorationTheme: const InputDecorationTheme(
       filled: true,
-      fillColor: Colors.black,
+      fillColor: Colors.white,
       errorStyle: TextStyle(height: 0),
       border: AppInputBorder.defaultInputBorder,
       enabledBorder: AppInputBorder.defaultInputBorder,
@@ -44,4 +44,14 @@ final appThemeData = {
       errorBorder: AppInputBorder.defaultInputBorder,
     ),
   ),
+};
+
+const themeToString = {
+  AppTheme.darkTheme: 'dark',
+  AppTheme.lightTheme: 'light',
+};
+
+const stringToTheme = {
+  'dark': AppTheme.darkTheme,
+  'light': AppTheme.lightTheme,
 };
