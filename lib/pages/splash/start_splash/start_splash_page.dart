@@ -13,14 +13,14 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state.status == AuthStatus.gotUser) {
+        if (state.status == AuthStatus.success) {
           Future.delayed(const Duration(seconds: 2), () {
             Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
               MainPage.routeName,
               (_) => false,
             );
           });
-        } else if (state.status == AuthStatus.noUser) {
+        } else if (state.status == AuthStatus.error) {
           Future.delayed(const Duration(seconds: 2), () {
             Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
               NewUserSplashPage.routeName,

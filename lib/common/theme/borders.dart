@@ -31,8 +31,8 @@ final appThemeData = {
     ),
   ),
   AppTheme.darkTheme: ThemeData(
-    scaffoldBackgroundColor: Colors.white,
-    primarySwatch: Colors.deepPurple,
+    scaffoldBackgroundColor: Colors.deepPurple,
+    primarySwatch: Colors.yellow,
     fontFamily: "Intel",
     inputDecorationTheme: const InputDecorationTheme(
       filled: true,

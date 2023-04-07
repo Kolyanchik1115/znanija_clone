@@ -1,4 +1,4 @@
 class Config {
   Config._();
-  static const host = 'http://localhost:7001/api';
+  static const host = 'http://localhost:8001/api';
 }
