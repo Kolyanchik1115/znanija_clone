@@ -76,6 +76,31 @@ class _LoginFormState extends State<LoginForm> {
             ),
             const SizedBox(height: 30),
             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 300,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      context.read<AuthBloc>().add(AuthGoogleLoginEvent());
+                    },
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      backgroundColor: Colors.purple,
+                    ),
+                    child: const Text(
+                      'Google',
+                      style: TextStyle(fontSize: 17),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 30),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(

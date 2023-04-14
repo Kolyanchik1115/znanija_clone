@@ -32,11 +32,10 @@ class _RegistrationFormState extends State<RegistrationForm> {
             decoration: passTextFieldDecorator,
             obscureText: true,
           ),
-          
           const SizedBox(height: 50),
           BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {
-              return Row(
+              return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
@@ -66,11 +65,57 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 20),
+                  SizedBox(
+                    width: 300,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        context
+                            .read<AuthBloc>()
+                            .add(AuthGoogleRegistrationEvent());
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        backgroundColor: Colors.purple,
+                      ),
+                      child: const Text(
+                        'Google',
+                        style: TextStyle(fontSize: 17),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  if (state.status == AuthStatus.success)
+                    SizedBox(
+                      width: 300,
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context, rootNavigator: true)
+                              .pushNamedAndRemoveUntil(
+                            MainPage.routeName,
+                            (_) => false,
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          backgroundColor: Colors.purple,
+                        ),
+                        child: const Text(
+                          'Continue',
+                          style: TextStyle(fontSize: 17),
+                        ),
+                      ),
+                    ),
                 ],
               );
             },
           ),
-          const SizedBox(height: 30),
         ],
       ),
     );
