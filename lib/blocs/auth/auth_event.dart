@@ -20,6 +20,10 @@ class AuthLoginEvent extends AuthEvent {
   List<Object?> get props => [email, password];
 }
 
+class AuthGoogleRegistrationEvent extends AuthEvent {}
+
+class AuthGoogleLoginEvent extends AuthEvent {}
+
 class AuthRegistrationEvent extends AuthEvent {
   final String email;
   final String password;
