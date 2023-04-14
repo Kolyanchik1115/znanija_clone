@@ -23,6 +23,7 @@ dependencies:
   json_annotation: ^4.8.0
   equatable: ^2.0.5
   page_transition: ^2.0.9
+  google_sign_in: ^6.1.0
 
 dev_dependencies:
   flutter_test:

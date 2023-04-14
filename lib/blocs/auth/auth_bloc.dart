@@ -28,7 +28,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final user = await _apiClient.signUp(
         email: event.email,
         password: event.password,
-        role: event.role,
       );
       await AuthenticateLocalData().saveUserToSecureStorage(userModel: user);
       emit(state.copyWith(user: user, status: AuthStatus.success));

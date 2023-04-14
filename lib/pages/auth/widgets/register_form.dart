@@ -14,7 +14,6 @@ class RegistrationForm extends StatefulWidget {
 class _RegistrationFormState extends State<RegistrationForm> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController roleController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +32,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
             decoration: passTextFieldDecorator,
             obscureText: true,
           ),
-          const SizedBox(height: 20),
-          TextField(
-            controller: roleController,
-            decoration: roleTextFieldDecorator,
-          ),
+          
           const SizedBox(height: 50),
           BlocBuilder<AuthBloc, AuthState>(
             builder: (context, state) {
@@ -52,7 +47,6 @@ class _RegistrationFormState extends State<RegistrationForm> {
                         context.read<AuthBloc>().add(AuthRegistrationEvent(
                               email: emailController.text,
                               password: passwordController.text,
-                              role: roleController.text,
                             ));
                         Navigator.of(context, rootNavigator: true)
                             .pushNamedAndRemoveUntil(

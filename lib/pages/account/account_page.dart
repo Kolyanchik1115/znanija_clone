@@ -53,13 +53,6 @@ class AccountPage extends StatelessWidget {
                                 fontWeight: FontWeight.w700,
                                 color: Colors.white),
                           ),
-                          Text(
-                            state.user.role,
-                            style: const TextStyle(
-                              fontSize: 13,
-                              color: Colors.white,
-                            ),
-                          ),
                         ],
                       ),
                     ),
