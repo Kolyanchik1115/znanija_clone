@@ -23,15 +23,13 @@ class AuthLoginEvent extends AuthEvent {
 class AuthRegistrationEvent extends AuthEvent {
   final String email;
   final String password;
-  final String role;
 
   AuthRegistrationEvent({
     required this.email,
     required this.password,
-    required this.role,
   });
   @override
-  List<Object?> get props => [email, password,role];
+  List<Object?> get props => [email, password];
 }
 
 class AuthCheckUserExist extends AuthEvent {}

@@ -1,7 +1,4 @@
-import 'dart:math';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:znanija_clone/common/config.dart';
 import 'package:znanija_clone/models/user_model.dart';
@@ -13,14 +10,12 @@ class ApiClient {
   Future<UserInfoModel> signUp({
     required String email,
     required String password,
-    required String role,
   }) async {
     final response = await _dio.post(
       '$_host/user/registration',
       data: {
         'email': email,
         'password': password,
-        'role': role,
       },
     );
 

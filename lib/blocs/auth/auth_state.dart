@@ -10,7 +10,6 @@ class AuthState extends Equatable {
     this.status = AuthStatus.initial,
     this.user = const UserInfoModel(
       email: '',
-      role: '',
     ),
   });
 
