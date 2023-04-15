@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
 
 import 'package:znanija_clone/pages/auth/register_page.dart';
 import 'package:znanija_clone/pages/auth/widgets/login_form.dart';
@@ -60,7 +62,9 @@ class LoginPage extends StatelessWidget {
                   ),
                   IconButton(
                       padding: const EdgeInsets.only(top: 2),
-                      onPressed: () {},
+                      onPressed: () {
+                        context.read<AuthBloc>().add(AuthGoogleLoginEvent());
+                      },
                       icon: const Icon(
                         Icons.g_mobiledata,
                         size: 45,
