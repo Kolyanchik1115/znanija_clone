@@ -30,6 +30,7 @@ class AccountPage extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.only(left: 30, bottom: 20),
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Stack(
                       children: const [
@@ -56,7 +57,7 @@ class AccountPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(width: 50),
+                    const SizedBox(width: 10),
                     Container(
                       margin: const EdgeInsets.only(left: 20),
                       child: Row(

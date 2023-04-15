@@ -29,7 +29,7 @@ class AuthenticateLocalData {
   }
 
   Future<void> clearStorage() async {
-    await _secureStorage.deleteAll();
+    await _secureStorage.delete(key: 'user');
   }
 
   bool isExpired({required String jwt}) {
