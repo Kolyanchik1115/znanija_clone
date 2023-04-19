@@ -56,8 +56,8 @@ android {
     signingConfigs {
         debug {
             keyAlias 'upload'
-            keyPassword '123321'
-            storePassword '123321'
+            keyPassword 'android'
+            storePassword 'android'
             storeFile file('upload-keystore.jks')
         }
     }
