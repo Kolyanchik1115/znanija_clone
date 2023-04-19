@@ -7,7 +7,7 @@ import 'package:znanija_clone/models/user_model.dart';
 
 class ApiClient {
   final _dio = Dio();
-  final _host = Config.host;
+  final _host = Config().host;
   static final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   static Future<UserInfoModel> fetchUserModelFromGoogle() async {

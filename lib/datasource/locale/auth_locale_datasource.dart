@@ -3,12 +3,10 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:intl/intl.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:znanija_clone/common/config.dart';
 import 'package:znanija_clone/models/user_model.dart';
 
 class AuthenticateLocalData {
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
-  final host = Config.host;
 
   Future<UserInfoModel?> getUserFromSecureStorage() async {
     final userModelFromStorage = await _secureStorage.read(key: 'user');

@@ -3,12 +3,12 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>979249256314-2g13vagqfo9tgu8dj99jvqo86c07hvj1.apps.googleusercontent.com</string>
+	<string>871141751847-a129a71r1qh670jpp87btupjnt7eiro2.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.979249256314-2g13vagqfo9tgu8dj99jvqo86c07hvj1</string>
+	<string>com.googleusercontent.apps.871141751847-a129a71r1qh670jpp87btupjnt7eiro2</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.signinGoogle</string>
+	<string>com.example.znanijaClone</string>
 </dict>
 </plist>
