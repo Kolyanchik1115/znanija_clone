@@ -26,7 +26,7 @@ class _LoginFormState extends State<LoginForm> {
         listener: (context, state) {
           if (state.status == AuthStatus.error) {
             log('Error auth');
-          } else if (state.status == AuthStatus.success) {
+          } else if (state.status == AuthStatus.authorized) {
             Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
               MainPage.routeName,
               (_) => false,

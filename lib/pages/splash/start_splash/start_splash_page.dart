@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
+import 'package:znanija_clone/pages/auth/login_page.dart';
 import 'package:znanija_clone/pages/main_page.dart';
 import 'package:znanija_clone/pages/splash/new_user_splash/new_user_splash_page.dart';
 
@@ -13,17 +14,26 @@ class SplashPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
-        if (state.status == AuthStatus.success) {
+        print('state after under splash ${state.status}');
+
+        if (state.status == AuthStatus.authorized) {
           Future.delayed(const Duration(seconds: 2), () {
             Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
               MainPage.routeName,
               (_) => false,
             );
           });
-        } else if (state.status == AuthStatus.error) {
+        } else if (state.status == AuthStatus.unauthorized) {
           Future.delayed(const Duration(seconds: 2), () {
             Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
               NewUserSplashPage.routeName,
+              (_) => false,
+            );
+          });
+        } else if (state.status == AuthStatus.error) {
+          Future.delayed(const Duration(seconds: 2), () {
+            Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
+              LoginPage.routeName,
               (_) => false,
             );
           });

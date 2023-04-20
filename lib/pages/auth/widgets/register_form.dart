@@ -88,7 +88,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  if (state.status == AuthStatus.success)
+                  if (state.status == AuthStatus.authorized)
                     SizedBox(
                       width: 300,
                       height: 50,

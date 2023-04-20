@@ -1,13 +1,13 @@
 part of 'auth_bloc.dart';
 
-enum AuthStatus { initial, error, success }
+enum AuthStatus { check, authorized, unauthorized, error, inProgress }
 
 class AuthState extends Equatable {
   final UserInfoModel user;
   final AuthStatus status;
 
   const AuthState({
-    this.status = AuthStatus.initial,
+    this.status = AuthStatus.check,
     this.user = const UserInfoModel(
       email: '',
     ),

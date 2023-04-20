@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
 import 'package:znanija_clone/pages/splash/new_user_splash/new_user_splash_page.dart';
+import 'package:znanija_clone/pages/splash/start_splash/start_splash_page.dart';
 
 Future<void> showLogoutDialog(BuildContext context) async {
   await showDialog(
@@ -32,7 +33,7 @@ Future<void> showLogoutDialog(BuildContext context) async {
                       context.read<AuthBloc>().add(AuthLogoutEvent());
                       Navigator.of(context, rootNavigator: true)
                           .pushNamedAndRemoveUntil(
-                        NewUserSplashPage.routeName,
+                        SplashPage.routeName,
                         (_) => false,
                       );
                     },
