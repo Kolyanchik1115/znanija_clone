@@ -1,15 +1,13 @@
-import 'dart:io';
-
 class Config {
-  late final String host;
-
-  Config() {
-    if (Platform.isAndroid) {
-      host = 'http://10.0.2.2:8002/api';
-    } else if (Platform.isIOS) {
-      host = 'http://127.0.0.1:8002/api';
-    }
-  }
-
-  String get point => host;
+  static const String host = 'http://192.168.0.101:8002/api';
+  static String imageUrl(String path) => 'http://192.168.0.101:8002/$path.png';
 }
+  // Config() {
+  //   if (Platform.isAndroid) {
+  //     host = ;
+  //   } else if (Platform.isIOS) {
+  //     host = 'http://127.0.0.1:8002/api';
+  //   }
+  // }
+  // String get point => host;
+

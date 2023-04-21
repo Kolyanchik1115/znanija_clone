@@ -1,13 +1,14 @@
 import 'dart:developer';
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:znanija_clone/models/user_model.dart';
 
 class AuthenticateLocalData {
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
-
+  final GoogleSignIn _googleSignIn = GoogleSignIn();
   Future<UserInfoModel?> getUserFromSecureStorage() async {
     final userModelFromStorage = await _secureStorage.read(key: 'user');
     if (userModelFromStorage != null) {
@@ -27,6 +28,17 @@ class AuthenticateLocalData {
   }
 
   Future<void> clearStorage() async {
+    final GoogleSignInAccount? googleUser =
+        await _googleSignIn.signInSilently();
+    if (googleUser != null) {
+      await googleUser.authentication.then((value) async {
+        await _googleSignIn.disconnect();
+        if (_googleSignIn.currentUser != null) {
+          await _googleSignIn.currentUser!.clearAuthCache();
+        }
+        await _secureStorage.deleteAll();
+      });
+    }
     await _secureStorage.delete(key: 'user');
   }
 
