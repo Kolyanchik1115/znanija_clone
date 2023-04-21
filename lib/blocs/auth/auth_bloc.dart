@@ -1,15 +1,14 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:znanija_clone/datasource/locale/auth_locale_datasource.dart';
-import 'package:znanija_clone/datasource/remote/remote_datasource.dart';
-import 'package:znanija_clone/models/google_adapter.dart';
+import 'package:znanija_clone/datasource/remote/auth_remote_datasource.dart';
 import 'package:znanija_clone/models/user_model.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final _apiClient = ApiClient();
+  final _apiClient = AuthClient();
 
   AuthBloc() : super(const AuthState()) {
     on<AuthLoginEvent>((event, emit) async {
@@ -27,7 +26,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<AuthGoogleLoginEvent>((event, emit) async {
       try {
-        final getUserFromGoogle = await ApiClient.fetchUserModelFromGoogle();
+        final getUserFromGoogle = await AuthClient.fetchUserModelFromGoogle();
 
         final userdata = await _apiClient.signIn(
           email: getUserFromGoogle.email,
@@ -43,7 +42,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<AuthGoogleRegistrationEvent>((event, emit) async {
       try {
-        final getUserFromGoogle = await ApiClient.fetchUserModelFromGoogle();
+        final getUserFromGoogle = await AuthClient.fetchUserModelFromGoogle();
 
         final userdata = await _apiClient.signUp(
           email: getUserFromGoogle.email,

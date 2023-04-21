@@ -5,9 +5,9 @@ import 'package:znanija_clone/common/config.dart';
 import 'package:znanija_clone/models/google_adapter.dart';
 import 'package:znanija_clone/models/user_model.dart';
 
-class ApiClient {
+class AuthClient {
   final _dio = Dio();
-  final _host = Config().host;
+  final _host = Config.host;
   static final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   static Future<UserInfoModel> fetchUserModelFromGoogle() async {
