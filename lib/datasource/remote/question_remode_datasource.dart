@@ -4,7 +4,7 @@ import 'package:znanija_clone/models/question_model.dart';
 
 class QuetionClient {
   final _dio = Dio();
-  final _host = Config().host;
+  final _host = Config.host;
 
   Future<QuestionList> getQuestions(
     int categoryId,
