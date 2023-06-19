@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:znanija_clone/common/config.dart';
-import 'package:znanija_clone/models/google_adapter.dart';
 import 'package:znanija_clone/models/user_model.dart';
 
 class AuthClient {
@@ -11,9 +11,19 @@ class AuthClient {
   static final GoogleSignIn _googleSignIn = GoogleSignIn();
 
   static Future<UserInfoModel> fetchUserModelFromGoogle() async {
-    final googleAdapter = GoogleUserAdapter();
-    final account = await _googleSignIn.signIn();
-    return googleAdapter.adaptData(account);
+    final googleSignInAccount = await _googleSignIn.signIn();
+    final googleAuth = await googleSignInAccount?.authentication;
+    final credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    final user = await FirebaseAuth.instance.signInWithCredential(credential);
+    final token = await user.user?.getIdToken();
+    print(token);
+    final email = user.user?.email ?? '';
+    final userInfo = UserInfoModel(email: email);
+    return userInfo;
   }
 
   Future<UserInfoModel> signUp({

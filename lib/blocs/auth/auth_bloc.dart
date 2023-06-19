@@ -76,6 +76,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     on<AuthLogoutEvent>((event, emit) async {
       await AuthenticateLocalData().clearStorage();
+      emit(state.copyWith(status: AuthStatus.initial));
     });
   }
 }
