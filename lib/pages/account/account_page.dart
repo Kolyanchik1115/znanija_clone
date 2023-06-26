@@ -32,8 +32,8 @@ class AccountPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Stack(
-                      children: const [
+                    const Stack(
+                      children: [
                         CircleAvatar(
                           radius: 32,
                           backgroundColor: Colors.white,

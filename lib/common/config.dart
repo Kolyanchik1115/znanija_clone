@@ -1,6 +1,6 @@
 class Config {
-  static const String host = 'http://192.168.0.100:6000/api';
-  static String imageUrl(String path) => 'http://192.168.0.100:6000/$path.png';
+  static const String host = 'http://192.168.0.101:6001/api';
+  static String imageUrl(String path) => 'http://192.168.0.101:6001/$path.png';
 }
   // Config() {
   //   if (Platform.isAndroid) {
