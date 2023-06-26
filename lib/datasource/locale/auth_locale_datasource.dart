@@ -1,34 +1,14 @@
 import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
-import 'package:znanija_clone/models/user_model.dart';
 
 class AuthenticateLocalData {
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage();
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
-
-  Future<UserInfoModel?> getUserFromSecureStorage() async {
-    final userModelFromStorage = await _secureStorage.read(key: 'user');
-    if (userModelFromStorage != null) {
-      final UserInfoModel userInfoModel = UserInfoModel.fromJson(
-        jsonDecode(userModelFromStorage),
-      );
-      return userInfoModel;
-    }
-    return null;
-  }
-
-  Future<void> saveUserToSecureStorage({
-    required UserInfoModel userModel,
-  }) async {
-    final jsonUserModel = jsonEncode(userModel);
-    await _secureStorage.write(key: 'user', value: jsonUserModel);
-  }
 
   Future<void> clearStorage() async {
     await _googleSignIn.signOut();

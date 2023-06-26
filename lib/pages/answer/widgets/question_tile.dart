@@ -12,7 +12,24 @@ class QuestionTile extends StatelessWidget {
       margin: const EdgeInsets.all(8.0),
       child: ListTile(
         title: Text(question.text),
-        subtitle: Text('Category ID: ${question.categoryId}'),
+        subtitle: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
+                side: const BorderSide(
+                  width: 1,
+                  color: Colors.black,
+                ),
+                backgroundColor: Colors.white,
+              ),
+              onPressed: () {},
+              child: const Text('Answer'),
+            )
+          ],
+        ),
         trailing: question.isAnswered ? const Icon(Icons.check_circle) : null,
       ),
     );

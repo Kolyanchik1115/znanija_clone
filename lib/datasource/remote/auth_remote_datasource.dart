@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:znanija_clone/common/config.dart';
@@ -9,6 +11,7 @@ class AuthClient {
   final _dio = Dio();
   final _host = Config.host;
   static final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final _secureStorage = const FlutterSecureStorage();
 
   static Future<UserInfoModel> fetchUserModelFromGoogle() async {
     final googleSignInAccount = await _googleSignIn.signIn();
@@ -17,10 +20,9 @@ class AuthClient {
       accessToken: googleAuth?.accessToken,
       idToken: googleAuth?.idToken,
     );
-
     final user = await FirebaseAuth.instance.signInWithCredential(credential);
-    final token = await user.user?.getIdToken();
-    print(token);
+    // final token = await user.user?.getIdToken();
+    // print(token);
     final email = user.user?.email ?? '';
     final userInfo = UserInfoModel(email: email);
     return userInfo;
@@ -39,14 +41,10 @@ class AuthClient {
     );
 
     if (response.statusCode == 200) {
-      final json = await response.data;
-      final token = json['token'] as String;
-      final decodedToken = JwtDecoder.decode(token);
-
-      final user = UserInfoModel.fromJson(decodedToken);
+      final user = await userTokenDecoder(response);
       return user;
     } else {
-      throw Exception('failed to load user $email');
+      throw Exception('Failed to load user $email');
     }
   }
 
@@ -63,15 +61,20 @@ class AuthClient {
     );
 
     if (response.statusCode == 200) {
-      final json = await response.data;
-      final token = json['token'] as String;
-      final decodedToken = JwtDecoder.decode(token);
-
-      final user = UserInfoModel.fromJson(decodedToken);
-
+      final user = await userTokenDecoder(response);
       return user;
     } else {
       throw Exception('failed to load user $email');
     }
+  }
+
+  Future<UserInfoModel> userTokenDecoder(Response<dynamic> response) async {
+    final json = await response.data;
+    final token = json['token'] as String;
+    final decodedToken = JwtDecoder.decode(token);
+    final user = UserInfoModel.fromJson(decodedToken);
+    final encodedToken = jsonEncode(decodedToken);
+    await _secureStorage.write(key: 'user', value: encodedToken);
+    return user;
   }
 }

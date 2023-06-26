@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class UserInfoModel extends Equatable {
   final String email;
+  
 
   const UserInfoModel({
     required this.email,
