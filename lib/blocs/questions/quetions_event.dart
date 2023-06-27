@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'quetions_bloc.dart';
 
 abstract class QuestionEvent extends Equatable {
@@ -9,14 +8,12 @@ abstract class QuestionEvent extends Equatable {
 }
 
 class FetchQuestions extends QuestionEvent {
-  final int categoryId, limit, page;
-  final bool isAnswered;
+  final int? categoryId;
+  final bool? isAnswered;
   const FetchQuestions({
-    required this.limit,
-    required this.categoryId,
-    required this.page,
-    required this.isAnswered,
+    this.isAnswered,
+    this.categoryId,
   });
   @override
-  List<Object?> get props => [categoryId, limit, page, isAnswered];
+  List<Object?> get props => [categoryId, isAnswered];
 }

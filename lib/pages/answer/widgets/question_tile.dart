@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:znanija_clone/models/category_model.dart';
 import 'package:znanija_clone/models/question_model.dart';
 
 class QuestionTile extends StatelessWidget {
   final Question question;
+  final Categories category;
 
-  const QuestionTile({required this.question, Key? key}) : super(key: key);
+  const QuestionTile({
+    Key? key,
+    required this.question,
+    required this.category,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(8.0),
       child: ListTile(
+        leading: Text(category.name),
         title: Text(question.text),
         subtitle: Row(
           mainAxisAlignment: MainAxisAlignment.end,

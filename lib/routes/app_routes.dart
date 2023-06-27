@@ -13,7 +13,6 @@ import 'package:znanija_clone/pages/splash/start_splash/start_splash_page.dart';
 class AppRouter {
   static Route onGeneratedRoute(RouteSettings settings) {
     WidgetBuilder builder;
-    // final arguments = settings.arguments;
 
     switch (settings.name) {
       case SplashPage.routeName:

@@ -43,7 +43,7 @@ class MainPage extends StatelessWidget {
           create: (context) => CategoryBloc()..add(FetchCategories()),
         ),
         BlocProvider(
-          create: (context) => QuestionsBloc(),
+          create: (context) => QuestionsBloc()..add(const FetchQuestions()),
         ),
       ],
       child: BlocConsumer<NavigationBloc, NavigationState>(
