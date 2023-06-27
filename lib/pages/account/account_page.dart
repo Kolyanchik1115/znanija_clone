@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
-import 'package:znanija_clone/pages/settings/settings_page.dart';
 
 class AccountPage extends StatelessWidget {
-  static const routeName = '/account_page';
+  static const routeName = '/account';
 
   const AccountPage({super.key});
   @override
@@ -102,8 +102,7 @@ class AccountPage extends StatelessWidget {
                 ),
                 CustomListTile(
                   title: 'Settings',
-                  onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
-                      SettingsPage.routeName, (route) => true),
+                  onTap: () => context.go('/account/settings'),
                   icon: const Icon(Icons.settings),
                 ),
               ],

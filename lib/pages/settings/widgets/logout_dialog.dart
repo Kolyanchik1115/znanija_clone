@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
 import 'package:znanija_clone/pages/splash/new_user_splash/new_user_splash_page.dart';
 
@@ -10,10 +11,7 @@ Future<void> showLogoutDialog(BuildContext context) async {
       return BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state.status == AuthStatus.initial) {
-            Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
-              NewUserSplashPage.routeName,
-              (_) => false,
-            );
+            context.go(NewUserSplashPage.routeName);
           }
         },
         child: AlertDialog(
@@ -63,7 +61,7 @@ Future<void> showLogoutDialog(BuildContext context) async {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.pop(context);
+                        context.pop();
                       },
                       child: Container(
                         width: 84,

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
 import 'package:znanija_clone/common/theme/forms.dart';
-import 'package:znanija_clone/pages/main_page.dart';
+import 'package:znanija_clone/pages/search/search_page.dart';
 
 class RegistrationForm extends StatefulWidget {
   const RegistrationForm({Key? key}) : super(key: key);
@@ -47,11 +48,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                               email: emailController.text,
                               password: passwordController.text,
                             ));
-                        Navigator.of(context, rootNavigator: true)
-                            .pushNamedAndRemoveUntil(
-                          MainPage.routeName,
-                          (_) => false,
-                        );
+                        context.go(SearchPage.routeName);
                       },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -94,11 +91,7 @@ class _RegistrationFormState extends State<RegistrationForm> {
                       height: 50,
                       child: ElevatedButton(
                         onPressed: () {
-                          Navigator.of(context, rootNavigator: true)
-                              .pushNamedAndRemoveUntil(
-                            MainPage.routeName,
-                            (_) => false,
-                          );
+                          context.go(SearchPage.routeName);
                         },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(

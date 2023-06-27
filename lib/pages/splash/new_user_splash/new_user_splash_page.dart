@@ -6,7 +6,7 @@ import 'package:znanija_clone/pages/auth/login_page.dart';
 import 'package:znanija_clone/pages/splash/new_user_splash/widgets/wellcome_widget.dart';
 
 class NewUserSplashPage extends StatelessWidget {
-  static const routeName = '/new_user';
+  static const routeName = '/newuser';
 
   const NewUserSplashPage({super.key});
 
@@ -39,9 +39,9 @@ class NewUserSplashPage extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  Row(
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: const [
+                    children: [
                       Expanded(child: Divider(color: Colors.black)),
                       SizedBox(width: 20),
                       Text(

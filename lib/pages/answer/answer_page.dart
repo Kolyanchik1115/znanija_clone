@@ -5,7 +5,7 @@ import 'package:znanija_clone/blocs/questions/quetions_bloc.dart';
 import 'package:znanija_clone/pages/answer/widgets/question_tile.dart';
 
 class AnswerPage extends StatelessWidget {
-  static const routeName = '/answer_page';
+  static const routeName = '/answerpage';
   const AnswerPage({Key? key}) : super(key: key);
 
   @override

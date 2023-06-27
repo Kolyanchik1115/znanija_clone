@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
-import 'package:znanija_clone/pages/main_page.dart';
+import 'package:znanija_clone/pages/search/search_page.dart';
 import 'package:znanija_clone/pages/splash/new_user_splash/new_user_splash_page.dart';
 
 class SplashPage extends StatelessWidget {
@@ -15,17 +16,11 @@ class SplashPage extends StatelessWidget {
       listener: (context, state) {
         if (state.status == AuthStatus.success) {
           Future.delayed(const Duration(seconds: 2), () {
-            Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
-              MainPage.routeName,
-              (_) => false,
-            );
+            context.go(SearchPage.routeName);
           });
         } else if (state.status == AuthStatus.error) {
           Future.delayed(const Duration(seconds: 2), () {
-            Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
-              NewUserSplashPage.routeName,
-              (_) => false,
-            );
+            context.go(NewUserSplashPage.routeName);
           });
         }
       },

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:znanija_clone/pages/account/account_page.dart';
 import 'package:znanija_clone/pages/settings/widgets/logout_dialog.dart';
 import 'package:znanija_clone/pages/settings/widgets/theme_dialog.dart';
 
 class SettingsPage extends StatelessWidget {
-  static const routeName = '/settings';
+  static const routeName = 'settings';
 
   const SettingsPage({super.key});
 
@@ -16,7 +17,7 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => context.pop(),
         ),
         title: const Align(
           alignment: Alignment.topLeft,

@@ -23,12 +23,12 @@ class MyApp extends StatelessWidget {
         create: (context) => SettingsBloc()..add(ThemeCheckExist()),
         child: BlocBuilder<SettingsBloc, SettingsState>(
           builder: (context, state) {
-            return MaterialApp(
+            return MaterialApp.router(
               debugShowCheckedModeBanner: false,
               theme: state.theme == AppTheme.lightTheme
                   ? appThemeData[AppTheme.lightTheme]
                   : appThemeData[AppTheme.darkTheme],
-              onGenerateRoute: AppRouter.onGeneratedRoute,
+              routerConfig: AppRouter.goRouter,
             );
           },
         ),

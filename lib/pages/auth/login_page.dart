@@ -6,7 +6,7 @@ import 'package:znanija_clone/pages/auth/register_page.dart';
 import 'package:znanija_clone/pages/auth/widgets/login_form.dart';
 
 class LoginPage extends StatelessWidget {
-  static const routeName = '/login_page';
+  static const routeName = '/loginpage';
 
   const LoginPage({super.key});
 

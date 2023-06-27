@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:znanija_clone/pages/auth/widgets/register_form.dart';
 
 class RegistrationPage extends StatelessWidget {
-  static const routeName = '/register_page';
+  static const routeName = '/registerpage';
 
   const RegistrationPage({super.key});
 

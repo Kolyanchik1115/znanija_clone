@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatelessWidget {
-  static const routeName = 'search';
+  static const routeName = '/search';
 
   const SearchPage({super.key});
 
