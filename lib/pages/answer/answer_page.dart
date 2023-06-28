@@ -12,7 +12,26 @@ class AnswerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Questions'),
+        title: Row(
+          children: [
+            InkWell(
+              child: const Icon(
+                Icons.filter_alt,
+                color: Colors.white,
+              ),
+              onTap: () {},
+            ),
+            const SizedBox(width: 10),
+            const Text(
+              'Sort questions',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        centerTitle: false,
       ),
       body: Column(
         children: [
