@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:znanija_clone/pages/account/account_page.dart';
-import 'package:znanija_clone/pages/answer/answer_page.dart';
-import 'package:znanija_clone/pages/auth/login_page.dart';
-import 'package:znanija_clone/pages/auth/register_page.dart';
-import 'package:znanija_clone/pages/main_page.dart';
-import 'package:znanija_clone/pages/search/search_page.dart';
-import 'package:znanija_clone/pages/settings/settings_page.dart';
-import 'package:znanija_clone/pages/splash/new_user_splash/new_user_splash_page.dart';
-import 'package:znanija_clone/pages/splash/start_splash/start_splash_page.dart';
+import 'package:znanija_clone/core/utils/route_animations.dart';
+import 'package:znanija_clone/presentation/pages/account/account_page.dart';
+import 'package:znanija_clone/presentation/pages/question/full_question.dart';
+import 'package:znanija_clone/presentation/pages/question/question_page.dart';
+import 'package:znanija_clone/presentation/pages/auth/login_page.dart';
+import 'package:znanija_clone/presentation/pages/auth/register_page.dart';
+import 'package:znanija_clone/presentation/pages/main_page.dart';
+import 'package:znanija_clone/presentation/pages/search/search_page.dart';
+import 'package:znanija_clone/presentation/pages/settings/settings_page.dart';
+import 'package:znanija_clone/presentation/pages/splash/new_user_splash/new_user_splash_page.dart';
+import 'package:znanija_clone/presentation/pages/splash/start_splash/start_splash_page.dart';
 
 class AppRouter {
-  final navigationKey = GlobalKey<NavigatorState>();
-
   static final GoRouter goRouter = GoRouter(
     initialLocation: SplashPage.routeName,
     routes: <RouteBase>[
@@ -45,19 +45,28 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                  path: SearchPage.routeName,
-                  builder: (BuildContext context, GoRouterState state) {
-                    return const SearchPage();
-                  }),
+                path: SearchPage.routeName,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const SearchPage();
+                },
+              ),
             ],
           ),
           StatefulShellBranch(
             routes: [
               GoRoute(
-                  path: AnswerPage.routeName,
-                  builder: (BuildContext context, GoRouterState state) {
-                    return const AnswerPage();
-                  }),
+                path: QuestionPage.routeName,
+                builder: (BuildContext context, GoRouterState state) {
+                  return const QuestionPage();
+                },
+                routes: [
+                  GoRoute(
+                    path: FullQuestion.routeName,
+                    pageBuilder: (context, state) =>
+                        buildSlideTransitionPage(const FullQuestion()),
+                  ),
+                ],
+              ),
             ],
           ),
           StatefulShellBranch(
@@ -70,9 +79,8 @@ class AppRouter {
                 routes: [
                   GoRoute(
                     path: SettingsPage.routeName,
-                    builder: (BuildContext context, GoRouterState state) {
-                      return const SettingsPage();
-                    },
+                    pageBuilder: (context, state) =>
+                        buildSlideTransitionPage(const SettingsPage()),
                   ),
                 ],
               ),

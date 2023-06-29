@@ -1,9 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:znanija_clone/blocs/auth/auth_bloc.dart';
-import 'package:znanija_clone/blocs/settings/settings_bloc.dart';
-import 'package:znanija_clone/common/theme/borders.dart';
+
+import 'package:znanija_clone/core/enums/theme_type.dart';
+import 'package:znanija_clone/core/resources/app_themes.dart';
+import 'package:znanija_clone/presentation/blocs/auth/auth_bloc.dart';
+import 'package:znanija_clone/presentation/blocs/settings/settings_bloc.dart';
 import 'package:znanija_clone/routes/app_routes.dart';
 
 Future<void> main() async {
@@ -26,8 +28,8 @@ class MyApp extends StatelessWidget {
             return MaterialApp.router(
               debugShowCheckedModeBanner: false,
               theme: state.theme == AppTheme.lightTheme
-                  ? appThemeData[AppTheme.lightTheme]
-                  : appThemeData[AppTheme.darkTheme],
+                  ? AppThemeData.lightTheme
+                  : AppThemeData.darkTheme,
               routerConfig: AppRouter.goRouter,
             );
           },
