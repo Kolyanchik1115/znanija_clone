@@ -102,7 +102,7 @@ class AccountPage extends StatelessWidget {
                 ),
                 CustomListTile(
                   title: 'Settings',
-                  onTap: () => context.go('/account/settings'),
+                  onTap: () => context.push('/account/settings'),
                   icon: const Icon(Icons.settings),
                 ),
               ],

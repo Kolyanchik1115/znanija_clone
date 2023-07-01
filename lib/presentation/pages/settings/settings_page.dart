@@ -6,7 +6,7 @@ import 'package:znanija_clone/presentation/pages/settings/widgets/logout_dialog.
 import 'package:znanija_clone/presentation/pages/settings/widgets/theme_dialog.dart';
 
 class SettingsPage extends StatelessWidget {
-  static const routeName = 'settings';
+  static const routeName = '/account/settings';
 
   const SettingsPage({super.key});
 
