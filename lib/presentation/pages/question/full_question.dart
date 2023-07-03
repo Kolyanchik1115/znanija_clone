@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:znanija_clone/presentation/blocs/category/category_bloc.dart';
 
 class FullQuestion extends StatelessWidget {
-  static const routeName = 'fullquestion';
+  static const routeName = '/questionpage/fullquestion';
 
   const FullQuestion({super.key});
 
@@ -23,27 +23,24 @@ class FullQuestion extends StatelessWidget {
           icon: const Icon(Icons.arrow_back_ios, color: Colors.black),
           onPressed: () => context.pop(),
         ),
-        title: Align(
+        title: const Align(
           alignment: Alignment.topLeft,
-          child: BlocBuilder<CategoryBloc, CategoryState>(
-            builder: (context, state) {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Answer',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  Text(
-                    state.categories[1].name,
-                    style: const TextStyle(color: Colors.black, fontSize: 14),
-                  ),
-                ],
-              );
-            },
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Answer',
+                style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold),
+              ),
+              Text(
+                // state.categories[1].name,
+                'test',
+                style: TextStyle(color: Colors.black, fontSize: 14),
+              ),
+            ],
           ),
         ),
         elevation: 0,
@@ -86,7 +83,11 @@ class FullQuestion extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.only(
+              left: 16.0,
+              right: 16.0,
+              bottom: 100,
+            ),
             child: SizedBox(
               width: double.infinity,
               child: ElevatedButton(

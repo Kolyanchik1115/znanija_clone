@@ -1,10 +1,12 @@
 class Config {
-  static const String host = 'http://192.168.0.102:6001/api';
-  static String imageUrl(String path) => 'http://192.168.0.102:6001/$path.png';
+  static const String addres = 'http://127.0.0.1:6001';
+  static const String host = '$addres/api';
+  static String imageUrl(String path) => '$addres/$path.png';
 }
   // Config() {
+  // static const String host = 'http://192.168.0.102:6001/api';
   //   if (Platform.isAndroid) {
-  //     host = ;
+  //     host = 'http://127.0.0.1:8002/api' ;
   //   } else if (Platform.isIOS) {
   //     host = 'http://127.0.0.1:8002/api';
   //   }

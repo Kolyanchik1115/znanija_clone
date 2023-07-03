@@ -59,7 +59,7 @@ class QuestionTile extends StatelessWidget {
                 ),
                 backgroundColor: Colors.white,
               ),
-              onPressed: () => context.go('/questionpage/fullquestion'),
+              onPressed: () => context.push('/questionpage/fullquestion'),
               child: const Text('Answer'),
             )
           ],

@@ -13,8 +13,10 @@ import 'package:znanija_clone/presentation/pages/splash/new_user_splash/new_user
 import 'package:znanija_clone/presentation/pages/splash/start_splash/start_splash_page.dart';
 
 class AppRouter {
+  static final navKey = GlobalKey<NavigatorState>();
   static final GoRouter goRouter = GoRouter(
     initialLocation: SplashPage.routeName,
+    navigatorKey: navKey,
     routes: <RouteBase>[
       GoRoute(
         path: SplashPage.routeName,
@@ -59,13 +61,7 @@ class AppRouter {
                 builder: (BuildContext context, GoRouterState state) {
                   return const QuestionPage();
                 },
-                routes: [
-                  GoRoute(
-                    path: FullQuestion.routeName,
-                    pageBuilder: (context, state) =>
-                        buildSlideTransitionPage(const FullQuestion()),
-                  ),
-                ],
+                
               ),
             ],
           ),
@@ -76,17 +72,22 @@ class AppRouter {
                 builder: (BuildContext context, GoRouterState state) {
                   return const AccountPage();
                 },
-                routes: [
-                  GoRoute(
-                    path: SettingsPage.routeName,
-                    pageBuilder: (context, state) =>
-                        buildSlideTransitionPage(const SettingsPage()),
-                  ),
-                ],
               ),
             ],
           ),
         ],
+      ),
+      GoRoute(
+        parentNavigatorKey: navKey,
+        path: FullQuestion.routeName,
+        pageBuilder: (context, state) =>
+            buildSlideTransitionPage(const FullQuestion()),
+      ),
+      GoRoute(
+        parentNavigatorKey: navKey,
+        path: SettingsPage.routeName,
+        pageBuilder: (context, state) =>
+            buildSlideTransitionPage(const SettingsPage()),
       ),
     ],
   );

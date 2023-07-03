@@ -50,9 +50,10 @@ class AccountPage extends StatelessWidget {
                           Text(
                             state.user.email,
                             style: const TextStyle(
-                                fontSize: 22,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white),
+                              fontSize: 22,
+                              fontWeight: FontWeight.w700,
+                              color: Colors.white,
+                            ),
                           ),
                         ],
                       ),
@@ -102,7 +103,7 @@ class AccountPage extends StatelessWidget {
                 ),
                 CustomListTile(
                   title: 'Settings',
-                  onTap: () => context.go('/account/settings'),
+                  onTap: () => context.push('/account/settings'),
                   icon: const Icon(Icons.settings),
                 ),
               ],
