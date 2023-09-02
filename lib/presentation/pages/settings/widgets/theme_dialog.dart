@@ -16,13 +16,12 @@ Future<void> showThemeDialog(BuildContext context) async {
               content: BlocBuilder<SettingsBloc, SettingsState>(
                 builder: (context, state) {
                   String groupValue = state.theme == AppTheme.darkTheme
-                      ? 'AppTheme.darkTheme'
-                      : 'AppTheme.lightTheme';
-
+                      ? AppTheme.darkTheme.name
+                      : AppTheme.lightTheme.name;
                   return Column(
                     children: [
                       RadioListTile(
-                        value: 'AppTheme.lightTheme',
+                        value: AppTheme.lightTheme.name,
                         groupValue: groupValue,
                         title: const Text("Light theme"),
                         onChanged: (newValue) {
@@ -34,7 +33,7 @@ Future<void> showThemeDialog(BuildContext context) async {
                         selected: false,
                       ),
                       RadioListTile(
-                        value: 'AppTheme.darkTheme',
+                        value: AppTheme.darkTheme.name,
                         groupValue: groupValue,
                         title: const Text("Dark theme"),
                         onChanged: (newValue) {

@@ -56,7 +56,7 @@ class NewUserSplashPage extends StatelessWidget {
                     height: 50,
                   ),
                   const WelcomeWidget(),
-                  const Spacer(flex: 2),
+                  const SizedBox(height: 15),
                   Center(
                     child: SizedBox(
                       width: 300,
@@ -99,7 +99,7 @@ class NewUserSplashPage extends StatelessWidget {
                     ),
                   ),
                   const Padding(
-                    padding: EdgeInsets.symmetric(vertical: 24),
+                    padding: EdgeInsets.symmetric(vertical: 5),
                     child: Center(child: Text("See our reward system >> ")),
                   )
                 ],

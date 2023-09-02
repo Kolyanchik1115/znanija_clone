@@ -47,8 +47,9 @@ class QuestionTile extends StatelessWidget {
           ],
         ),
         subtitle: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            const Icon(Icons.attach_file_rounded,),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -59,7 +60,8 @@ class QuestionTile extends StatelessWidget {
                 ),
                 backgroundColor: Colors.white,
               ),
-              onPressed: () => context.push('/questionpage/fullquestion'),
+              onPressed: () => context.push('/questionpage/fullquestion',
+                  extra: [category, question]),
               child: const Text('Answer'),
             )
           ],

@@ -3,26 +3,24 @@ part of 'auth_bloc.dart';
 enum AuthStatus { initial, error, success }
 
 class AuthState extends Equatable {
-  final UserInfoModel user;
+  final TokenResponse? token;
   final AuthStatus status;
 
   const AuthState({
     this.status = AuthStatus.initial,
-    this.user = const UserInfoModel(
-      email: '',
-    ),
+    this.token,
   });
 
   AuthState copyWith({
-    UserInfoModel? user,
+    TokenResponse? token,
     AuthStatus? status,
   }) {
     return AuthState(
-      user: user ?? this.user,
+      token: token ?? this.token,
       status: status ?? this.status,
     );
   }
 
   @override
-  List<Object> get props => [user, status];
+  List<Object?> get props => [token, status];
 }

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:znanija_clone/core/utils/route_animations.dart';
+import 'package:znanija_clone/data/models/category_model.dart';
+import 'package:znanija_clone/data/models/question_model.dart';
 import 'package:znanija_clone/presentation/pages/account/account_page.dart';
 import 'package:znanija_clone/presentation/pages/question/full_question.dart';
 import 'package:znanija_clone/presentation/pages/question/question_page.dart';
@@ -61,7 +63,6 @@ class AppRouter {
                 builder: (BuildContext context, GoRouterState state) {
                   return const QuestionPage();
                 },
-                
               ),
             ],
           ),
@@ -80,8 +81,10 @@ class AppRouter {
       GoRoute(
         parentNavigatorKey: navKey,
         path: FullQuestion.routeName,
-        pageBuilder: (context, state) =>
-            buildSlideTransitionPage(const FullQuestion()),
+        pageBuilder: (context, state) => buildSlideTransitionPage(FullQuestion(
+          category: (state.extra as List)[0] as Categories,
+          question: (state.extra as List)[1] as Question,
+        )),
       ),
       GoRoute(
         parentNavigatorKey: navKey,
