@@ -12,7 +12,7 @@ class AnswerBloc extends Bloc<AnswerEvent, AnswerState> {
   AnswerBloc() : super(const AnswerState()) {
     on<AddAnswerEvent>((event, emit) async {
       try {
-        final answer = await AnswerClient().addAnswer(event.text, event.questionId, event.file!);
+        final answer = await AnswerClient().addAnswer(event.text, event.questionId, event.file);
         emit(state.copyWith(answer: answer, error: ''));
       } catch (e) {
         emit(state.copyWith(error: 'Произошла ошибка при отправке ответа'));

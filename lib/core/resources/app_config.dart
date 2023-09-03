@@ -1,5 +1,5 @@
 class Config {
-  static const String addres = 'http://192.168.0.100:6002';
+  static const String addres = 'http://192.168.0.102:6002';
   static const String host = '$addres/api';
   static String imageUrl(String path) => '$addres/$path.png';
 }

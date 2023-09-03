@@ -10,14 +10,14 @@ abstract class AnswerEvent extends Equatable {
 class AddAnswerEvent extends AnswerEvent {
   final String text;
   final int questionId;
-  final List<File>? file;
+  final List<File> file;
 
   const AddAnswerEvent({
     required this.text,
     required this.questionId,
-    this.file,
+    this.file = const [],
   });
 
   @override
-  List<Object?> get props => [text, questionId, file];
+  List<Object> get props => [text, questionId, file];
 }

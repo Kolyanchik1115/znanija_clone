@@ -4,11 +4,11 @@ import 'package:znanija_clone/core/utils/route_animations.dart';
 import 'package:znanija_clone/data/models/category_model.dart';
 import 'package:znanija_clone/data/models/question_model.dart';
 import 'package:znanija_clone/presentation/pages/account/account_page.dart';
-import 'package:znanija_clone/presentation/pages/question/full_question.dart';
-import 'package:znanija_clone/presentation/pages/question/question_page.dart';
 import 'package:znanija_clone/presentation/pages/auth/login_page.dart';
 import 'package:znanija_clone/presentation/pages/auth/register_page.dart';
 import 'package:znanija_clone/presentation/pages/main_page.dart';
+import 'package:znanija_clone/presentation/pages/question/full_question.dart';
+import 'package:znanija_clone/presentation/pages/question/question_page.dart';
 import 'package:znanija_clone/presentation/pages/search/search_page.dart';
 import 'package:znanija_clone/presentation/pages/settings/settings_page.dart';
 import 'package:znanija_clone/presentation/pages/splash/new_user_splash/new_user_splash_page.dart';
@@ -22,27 +22,22 @@ class AppRouter {
     routes: <RouteBase>[
       GoRoute(
         path: SplashPage.routeName,
-        builder: (BuildContext context, GoRouterState state) =>
-            const SplashPage(),
+        builder: (BuildContext context, GoRouterState state) => const SplashPage(),
       ),
       GoRoute(
         path: NewUserSplashPage.routeName,
-        builder: (BuildContext context, GoRouterState state) =>
-            const NewUserSplashPage(),
+        builder: (BuildContext context, GoRouterState state) => const NewUserSplashPage(),
       ),
       GoRoute(
         path: LoginPage.routeName,
-        builder: (BuildContext context, GoRouterState state) =>
-            const LoginPage(),
+        builder: (BuildContext context, GoRouterState state) => const LoginPage(),
       ),
       GoRoute(
         path: RegistrationPage.routeName,
-        builder: (BuildContext context, GoRouterState state) =>
-            const RegistrationPage(),
+        builder: (BuildContext context, GoRouterState state) => const RegistrationPage(),
       ),
       StatefulShellRoute.indexedStack(
-        builder: (BuildContext context, GoRouterState state,
-            StatefulNavigationShell shell) {
+        builder: (BuildContext context, GoRouterState state, StatefulNavigationShell shell) {
           return MainPage(statefulNavigationShell: shell);
         },
         branches: [
@@ -89,8 +84,7 @@ class AppRouter {
       GoRoute(
         parentNavigatorKey: navKey,
         path: SettingsPage.routeName,
-        pageBuilder: (context, state) =>
-            buildSlideTransitionPage(const SettingsPage()),
+        pageBuilder: (context, state) => buildSlideTransitionPage(const SettingsPage()),
       ),
     ],
   );

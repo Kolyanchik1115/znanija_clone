@@ -9,8 +9,10 @@ class AnswerClient {
   final _dio = Dio();
   final _host = Config.host;
 
+
   Future<Answer> addAnswer(String text, int questionId, List<File> files) async {
     final token = await AuthenticateLocalData().getToken();
+
     try {
       final formData = FormData.fromMap({
         'text': text,
@@ -19,15 +21,15 @@ class AnswerClient {
 
       for (var file in files) {
         formData.files.add(MapEntry(
-          'files',
-          await MultipartFile.fromFile(file.path, filename: 'selected_file'),
+          "files",
+          await MultipartFile.fromFile(file.path),
         ));
       }
 
       final response = await _dio.post('$_host/answer',
           data: formData,
           options: Options(
-            contentType: Headers.jsonContentType,
+            contentType: Headers.multipartFormDataContentType,
             headers: {
               HttpHeaders.authorizationHeader: 'Bearer $token',
             },

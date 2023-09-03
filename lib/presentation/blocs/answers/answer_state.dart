@@ -3,12 +3,12 @@ part of 'answer_bloc.dart';
 class AnswerState extends Equatable {
   final String text;
   final int questionId;
-  final List<File>? file;
+  final List<File> file;
   final Answer? answer;
   final String error;
 
   const AnswerState(
-      { this.error = '', this.text = '', this.questionId = 0, this.file, this.answer});
+      { this.error = '', this.text = '', this.questionId = 0, this.file = const [], this.answer});
 
   @override
   List<Object?> get props => [text, questionId, file, error,answer];

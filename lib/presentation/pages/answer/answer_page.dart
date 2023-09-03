@@ -14,13 +14,12 @@ class AnswerPage extends StatefulWidget {
 
 class AnswerPageState extends State<AnswerPage> {
   final TextEditingController _textController = TextEditingController();
-  File? _selectedFile;
   List<File> _selectedFiles = [];
 
   Future<void> _pickFiles() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.any,
-      allowMultiple: true, // Разрешить выбор нескольких файлов
+      allowMultiple: true,
     );
 
     if (result != null && result.files.isNotEmpty) {
@@ -30,19 +29,10 @@ class AnswerPageState extends State<AnswerPage> {
     }
   }
 
-  Future<void> _uploadFiles(AnswerBloc answerBloc) async {
-    if (_selectedFiles.isEmpty) {
-      return;
-    }
-
-    try {
-      final text = _textController.text;
-      const questionId = 3;
-
-      answerBloc.add(AddAnswerEvent(text: text, questionId: questionId, file: _selectedFiles));
-    } catch (e) {
-      print('Ошибка при отправке ответа: $e');
-    }
+  void _removeFile(int index) {
+    setState(() {
+      _selectedFiles.removeAt(index);
+    });
   }
 
   @override
@@ -59,19 +49,47 @@ class AnswerPageState extends State<AnswerPage> {
         builder: (context, state) {
           return Scaffold(
             body: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TextField(
-                  controller: _textController,
-                  decoration: const InputDecoration(labelText: 'Текст ответа'),
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextField(
+                    controller: _textController,
+                    decoration: const InputDecoration(labelText: 'Текст ответа'),
+                  ),
                 ),
                 const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: _pickFiles,
-                  child: Text(_selectedFile != null ? 'Выбран файл' : 'Выбрать файл'),
+                  child: Text(_selectedFiles.isNotEmpty ? 'Выбрано файлов: ${_selectedFiles.length}' : 'Выбрать файлы'),
+                ),
+                const SizedBox(height: 16.0),
+                Column(
+                  children: List.generate(_selectedFiles.length, (index) {
+                    final file = _selectedFiles[index];
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(file.path.split('/').last),
+                        IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () {
+                            _removeFile(index);
+                          },
+                        ),
+                      ],
+                    );
+                  }),
                 ),
                 const SizedBox(height: 16.0),
                 ElevatedButton(
-                  onPressed: () => _uploadFiles(context.read<AnswerBloc>()),
+                  onPressed: () {
+                    context
+                        .read<AnswerBloc>()
+                        .add(AddAnswerEvent(text: _textController.text, questionId: 3, file: _selectedFiles));
+                    Navigator.pop(context);
+                  },
                   child: const Text('Отправить ответ'),
                 ),
               ],
